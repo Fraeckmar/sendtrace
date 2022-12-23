@@ -1,0 +1,21 @@
+.shiptrack .shipment-title-input {
+    font-size: 24px !important;
+}
+#wpst-setting-content .card .card-header {
+    background-color: transparent;
+}
+.shiptrack input[type=radio]:checked:before {
+    background-color: #fff;
+}
+.shiptrack .wpst-sub-content {
+    display: none;
+}
+.shiptrack .wpst-sub-content.active {
+    display: block;
+}
+.shiptrack .tab-container {
+    display: none;
+}
+.shiptrack .tab-container.active {
+    display: block;
+}

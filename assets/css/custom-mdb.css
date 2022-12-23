@@ -1,0 +1,64 @@
+.shiptrack .card {
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    border: 0;
+    font-weight: 400;
+}
+.shiptrack .card, .shiptrack .navbar {
+    -webkit-box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+.shiptrack .btn {
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    padding: 0.84rem 2.14rem;
+    font-size: .81rem;
+    -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    -o-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    margin: 0.375rem;
+    border: 0;
+    -webkit-border-radius: 0.125rem;
+    border-radius: 0.125rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    white-space: normal;
+    word-wrap: break-word;
+    color: #fff;
+}
+.shiptrack .btn-sm, .shiptrack .btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: .81rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+.shiptrack .waves-effect {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.shiptrack ul.bullets {
+    list-style-type: disc !important;
+    padding-left:1em !important;
+    margin-left:1em;
+}
+
+.shiptrack input::placeholder,
+.shiptrack select::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #adadad !important;
+    opacity: 1; /* Firefox */
+}
+.shiptrack input:-ms-input-placeholder,
+.shiptrack select:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #adadad !important;
+}
+.shiptrack input::-ms-input-placeholder,
+.shiptrack select::-ms-input-placeholder { /* Microsoft Edge */
+    color: #adadad !important;
+}
+
+@media (min-width: 1024px) {
+    .shiptrack .form-control.date_picker {
+        width: 50%;
+    }
+}
