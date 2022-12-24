@@ -3,7 +3,7 @@
 class WPSTField
 {
     function fields($shipment_id=0) {
-        global $shiptrack;
+        global $sendtrace;
         $fields = array(
             'shipper_information' => array(
                 'section_col' => '6',
@@ -12,24 +12,24 @@ class WPSTField
                 'fields' => array(
                     'wpst_shipper_name' => array(
                         'key' => 'wpst_shipper_name',
-                        'label' => __('Shipper Name', 'shiptrack'),
+                        'label' => __('Shipper Name', 'sendtrace'),
                         'type' => 'text',
                         'required' => true
                     ),
                     'wpst_shipper_phone_number' => array(
                         'key' => 'wpst_shipper_phone_number',
-                        'label' => __('Phone Number', 'shiptrack'),
+                        'label' => __('Phone Number', 'sendtrace'),
                         'type' => 'number',
                         'extras' => 'step=any'
                     ),
                     'wpst_shipper_email' => array(
                         'key' => 'wpst_shipper_email',
-                        'label' => __('Email', 'shiptrack'),
+                        'label' => __('Email', 'sendtrace'),
                         'type' => 'email',
                     ),
                     'wpst_shipper_address' => array(
                         'key' => 'wpst_shipper_address',
-                        'label' => __('Address', 'shiptrack'),
+                        'label' => __('Address', 'sendtrace'),
                         'type' => 'address',
                     )
                 )
@@ -41,24 +41,24 @@ class WPSTField
                 'fields' => array(
                     'wpst_receiver_name' => array(
                         'key' => 'wpst_receiver_name',
-                        'label' => __('Receiver Name', 'shiptrack'),
+                        'label' => __('Receiver Name', 'sendtrace'),
                         'type' => 'text',
                         'required' => true
                     ),
                     'wpst_receiver_phone_number' => array(
                         'key' => 'wpst_receiver_phone_number',
-                        'label' => __('Phone Number', 'shiptrack'),
+                        'label' => __('Phone Number', 'sendtrace'),
                         'type' => 'number',
                         'extras' => 'step=any'
                     ),
                     'wpst_receiver_email' => array(
                         'key' => 'wpst_receiver_email',
-                        'label' => __('Email', 'shiptrack'),
+                        'label' => __('Email', 'sendtrace'),
                         'type' => 'email',
                     ),
                     'wpst_receiver_address' => array(
                         'key' => 'wpst_receiver_address',
-                        'label' => __('Address', 'shiptrack'),
+                        'label' => __('Address', 'sendtrace'),
                         'type' => 'address',
                     )
                 )
@@ -70,56 +70,56 @@ class WPSTField
                 'fields' => array(
                     'wpst_transporation_mode' => array(
                         'key' => 'wpst_transporation_mode',
-                        'label' => __('Transportation Mode', 'shiptrack'),
+                        'label' => __('Transportation Mode', 'sendtrace'),
                         'type' => 'select',
-                        'options' => $shiptrack->shipment_types(),
+                        'options' => $sendtrace->shipment_types(),
                         'class' => 'w-100'
                     ),
                     'wpst_courier' => array(
                         'key' => 'wpst_courier',
-                        'label' => __('Courier', 'shiptrack'),
+                        'label' => __('Courier', 'sendtrace'),
                         'type' => 'text',
                     ),
                     'wpst_carrier' => array(
                         'key' => 'wpst_carrier',
-                        'label' => __('Carrier', 'shiptrack'),
+                        'label' => __('Carrier', 'sendtrace'),
                         'type' => 'select',
-                        'options' => $shiptrack->carriers(),
+                        'options' => $sendtrace->carriers(),
                         'class' => 'w-100'
                     ),
                     'wpst_origin' => array(
                         'key' => 'wpst_origin',
-                        'label' => __('Origin', 'shiptrack'),
+                        'label' => __('Origin', 'sendtrace'),
                         'type' => 'text',
                     ),
                     'wpst_destination' => array(
                         'key' => 'wpst_destination',
-                        'label' => __('Destination', 'shiptrack'),
+                        'label' => __('Destination', 'sendtrace'),
                         'type' => 'text',
                     ),
                     'wpst_pickup_date' => array(
                         'key' => 'wpst_pickup_date',
-                        'label' => __('Pickup Date', 'shiptrack'),
+                        'label' => __('Pickup Date', 'sendtrace'),
                         'type' => 'date',
                     ),
                     'wpst_pickup_time' => array(
                         'key' => 'wpst_pickup_time',
-                        'label' => __('Pickup Time', 'shiptrack'),
+                        'label' => __('Pickup Time', 'sendtrace'),
                         'type' => 'time'
                     ),
                     'wpst_departure_time' => array(
                         'key' => 'wpst_departure_time',
-                        'label' => __('Departure Time', 'shiptrack'),
+                        'label' => __('Departure Time', 'sendtrace'),
                         'type' => 'time',
                     ),
                     'wpst_expected_delivery_date' => array(
                         'key' => 'wpst_expected_delivery_date',
-                        'label' => __('Expected Delivery Date', 'shiptrack'),
+                        'label' => __('Expected Delivery Date', 'sendtrace'),
                         'type' => 'date',
                     ),
                     'wpst_remarks' => array(
                         'key' => 'wpst_remarks',
-                        'label' => __('Remarks', 'shiptrack'),
+                        'label' => __('Remarks', 'sendtrace'),
                         'type' => 'textarea',
                         'class' => 'w-100'
                     ),
@@ -144,25 +144,25 @@ class WPSTField
     }
 
     function settings_field() {
-        global $shiptrack;
+        global $sendtrace;
         $admin_default_email = sanitize_email(get_bloginfo('admin_email'));
-        $status_list = $shiptrack->status_list();
+        $status_list = $sendtrace->status_list();
         $fields = array(
             'general' => array(
                 array(
-                    'heading' => __('Appearance & Company Info', 'shiptrack'),
+                    'heading' => __('Appearance & Company Info', 'sendtrace'),
                     'fields' => array(
                         array(
                             'key' => 'company_logo',
-                            'label' => __('Compay Logo', 'shiptrack'),
+                            'label' => __('Compay Logo', 'sendtrace'),
                             'type' => 'upload',
-                            'value' => $shiptrack->get_setting('general', 'company_logo'),
+                            'value' => $sendtrace->get_setting('general', 'company_logo'),
                             'setting' => 'general',
                             'group_class' => 'mb-0'
                         ),
                         array(
                             'key' => 'bg_color',
-                            'label' => __('Background Color', 'shiptrack'),
+                            'label' => __('Background Color', 'sendtrace'),
                             'type' => 'color',
                             'class' => 'form-control-color',
                             'value' => wpst_bg_color(),
@@ -170,7 +170,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'fg_color',
-                            'label' => __('Foreground Color', 'shiptrack'),
+                            'label' => __('Foreground Color', 'sendtrace'),
                             'type' => 'color',
                             'class' => 'form-control-color',
                             'value' => wpst_fg_color(),
@@ -179,124 +179,124 @@ class WPSTField
                     )
                 ),
                 array(
-                    'heading' => __('Shipment', 'shiptrack'),
+                    'heading' => __('Shipment', 'sendtrace'),
                     'fields' => array(
                         array(
                             'key' => 'auto_generate',
-                            'label' => __('Auto Generate Tracking No.?', 'shiptrack'),
+                            'label' => __('Auto Generate Tracking No.?', 'sendtrace'),
                             'type' => 'radio',
                             'options' => array('Yes', 'No'),
-                            'value' => $shiptrack->get_setting('general', 'auto_generate', 'Yes'),
+                            'value' => $sendtrace->get_setting('general', 'auto_generate', 'Yes'),
                             'setting' => 'general'
                         ),
                         array(
                             'key' => 'tracking_no_length',
-                            'label' => __('Tracking No. Length', 'shiptrack'),
+                            'label' => __('Tracking No. Length', 'sendtrace'),
                             'type' => 'number',
-                            'value' => !empty($shiptrack->get_setting('general', 'tracking_no_length')) ? $shiptrack->get_setting('general', 'tracking_no_length') : 8,
+                            'value' => !empty($sendtrace->get_setting('general', 'tracking_no_length')) ? $sendtrace->get_setting('general', 'tracking_no_length') : 8,
                             'setting' => 'general',
                             'description' => '<strong>Note:</strong> Prefix and Suffix are not include.'
                         ),
                         array(
                             'key' => 'tracking_no_prefix',
-                            'label' => __('Tracking No. Prefix', 'shiptrack'),
+                            'label' => __('Tracking No. Prefix', 'sendtrace'),
                             'type' => 'text',
-                            'value' => !empty($shiptrack->get_setting('general', 'tracking_no_prefix')) ? $shiptrack->get_setting('general', 'tracking_no_prefix') : 'SHIP',
+                            'value' => !empty($sendtrace->get_setting('general', 'tracking_no_prefix')) ? $sendtrace->get_setting('general', 'tracking_no_prefix') : 'SHIP',
                             'setting' => 'general'
                         ),
                         array(
                             'key' => 'tracking_no_suffix',
-                            'label' => __('Tracking No. Suffix', 'shiptrack'),
+                            'label' => __('Tracking No. Suffix', 'sendtrace'),
                             'type' => 'text',
-                            'value' => $shiptrack->get_setting('general', 'tracking_no_suffix'),
+                            'value' => $sendtrace->get_setting('general', 'tracking_no_suffix'),
                             'setting' => 'general'
                         ),
                         array(
                             'key' => 'status_list',
-                            'label' => __('Status Options', 'shiptrack'),
+                            'label' => __('Status Options', 'sendtrace'),
                             'type' => 'select',
                             'class' => 'selectize rounded border form-control selectize-set-min-height',
-                            'options' => $shiptrack->status_list(),
-                            'value' => $shiptrack->status_list(),
+                            'options' => $sendtrace->status_list(),
+                            'value' => $sendtrace->status_list(),
                             'setting' => 'general',
                             'extras' => 'multiple data-allow_create=true data-has_remove=true style=min-height:55px'
                         ),
                         array(
                             'key' => 'package_types',
-                            'label' => __('Package Types', 'shiptrack'),
+                            'label' => __('Package Types', 'sendtrace'),
                             'type' => 'select',
                             'class' => 'selectize rounded border form-control selectize-set-min-height',
-                            'options' => $shiptrack->package_types(),
-                            'value' => $shiptrack->package_types(),
+                            'options' => $sendtrace->package_types(),
+                            'value' => $sendtrace->package_types(),
                             'setting' => 'general',
                             'extras' => 'multiple data-allow_create=true data-has_remove=true style=min-height:55px'
                         ),
                         array(
                             'key' => 'transportation_mode',
-                            'label' => __('Transportation Mode', 'shiptrack'),
+                            'label' => __('Transportation Mode', 'sendtrace'),
                             'type' => 'select',
                             'class' => 'selectize rounded border form-control selectize-set-min-height',
-                            'options' => $shiptrack->shipment_types(),
-                            'value' => $shiptrack->shipment_types(),
+                            'options' => $sendtrace->shipment_types(),
+                            'value' => $sendtrace->shipment_types(),
                             'setting' => 'general',
                             'extras' => 'multiple data-allow_create=true data-has_remove=true style=min-height:55px'
                         ),
                         array(
                             'key' => 'carriers',
-                            'label' => __('Carrier Options', 'shiptrack'),
+                            'label' => __('Carrier Options', 'sendtrace'),
                             'type' => 'select',
                             'class' => 'selectize rounded border form-control selectize-set-min-height',
-                            'options' => $shiptrack->carriers(),
-                            'value' => $shiptrack->carriers(),
+                            'options' => $sendtrace->carriers(),
+                            'value' => $sendtrace->carriers(),
                             'setting' => 'general',
                             'extras' => 'multiple data-allow_create=true data-has_remove=true style=min-height:55px'
                         ),
                         array(
                             'key' => 'roles_modify_history',
-                            'label' => __('Roles can modify shipment history', 'shiptrack'),
+                            'label' => __('Roles can modify shipment history', 'sendtrace'),
                             'type' => 'checkbox',
                             'options' => wpst_get_user_roles(),
-                            'value' => $shiptrack->get_setting('general', 'roles_modify_history'),
+                            'value' => $sendtrace->get_setting('general', 'roles_modify_history'),
                             'setting' => 'general'
                         )
                     )
                 ),
                 array(
-                    'heading' => __('Multiple Pacakge', 'shiptrack'),
+                    'heading' => __('Multiple Pacakge', 'sendtrace'),
                     'fields' => array(
                         array(
                             'key' => 'weight_unit',
-                            'label' => __('Weight Unit', 'shiptrack'),
+                            'label' => __('Weight Unit', 'sendtrace'),
                             'type' => 'text',
-                            'value' => $shiptrack->weight_unit_used(),
+                            'value' => $sendtrace->weight_unit_used(),
                             'setting' => 'general'
                         ),
                         array(
                             'key' => 'dim_unit',
-                            'label' => __('Dimension Unit', 'shiptrack'),
+                            'label' => __('Dimension Unit', 'sendtrace'),
                             'type' => 'text',
-                            'value' => $shiptrack->dim_unit_used(),
+                            'value' => $sendtrace->dim_unit_used(),
                             'setting' => 'general'
                         ),
                         array(
                             'key' => 'volumetric_weight_divisor',
-                            'label' => __('Volumetric Weight Dvisor', 'shiptrack'),
+                            'label' => __('Volumetric Weight Dvisor', 'sendtrace'),
                             'description' => '<strong>Note</strong>: Use to get volumetric weight: (L*W*H) / Divisor',
                             'type' => 'text',
-                            'value' => $shiptrack->get_volumetric_weight_divisor(),
+                            'value' => $sendtrace->get_volumetric_weight_divisor(),
                             'setting' => 'general'
                         ),
                     )
                 ),
                 array(
-                    'heading' => __('Fees', 'shiptrack'),
+                    'heading' => __('Fees', 'sendtrace'),
                     'fields' => array(
                         array(
                             'key' => 'tax',
-                            'label' => __('Tax in (%)', 'shiptrack'),
+                            'label' => __('Tax in (%)', 'sendtrace'),
                             'description' => '<strong>Note</strong>: This will apply all payment transactions.',
                             'type' => 'number',
-                            'value' => $shiptrack->tax,
+                            'value' => $sendtrace->get_setting('general', 'tax', 0),
                             'extras' => 'step=any',
                             'setting' => 'general'
                         ),
@@ -305,27 +305,27 @@ class WPSTField
             ),
             'email_admin' => array(
                 array(
-                    'heading' => __('Admin Email Setting', 'shiptrack'),
+                    'heading' => __('Admin Email Setting', 'sendtrace'),
                     'fields' => array(
                         array(
                             'key' => 'admin_enable',
-                            'label' => __('Enable?', 'shiptrack'),
+                            'label' => __('Enable?', 'sendtrace'),
                             'type' => 'radio',
                             'required' => true,
                             'class' => '',
                             'group_class' => 'form-check-inline',
                             'options' => array('Yes', 'No'),
-                            'value' => $shiptrack->get_setting('email_admin', 'admin_enable', 'Yes'),
+                            'value' => $sendtrace->get_setting('email_admin', 'admin_enable', 'Yes'),
                             'setting' => 'email_admin'
                         ),
                         array(
                             'key' => 'admin_mail_to',
-                            'label' => __('Mail To', 'shiptrack'),
+                            'label' => __('Mail To', 'sendtrace'),
                             'type' => 'select',
                             'required' => true,
                             'class' => 'selectize',
-                            'options' => $shiptrack->get_setting('email_admin', 'admin_mail_to', array($admin_default_email)),
-                            'value' => $shiptrack->get_setting('email_admin', 'admin_mail_to', $admin_default_email),
+                            'options' => $sendtrace->get_setting('email_admin', 'admin_mail_to', array($admin_default_email)),
+                            'value' => $sendtrace->get_setting('email_admin', 'admin_mail_to', $admin_default_email),
                             'placeholder' => 'sample@gmail.com',
                             'description' => '<strong>Note:</strong> Type and select to add new item',
                             'extras' => 'multiple data-has_remove="true" data-allow_create="true"',
@@ -333,12 +333,12 @@ class WPSTField
                         ),
                         array(
                             'key' => 'admin_cc',
-                            'label' => __('Cc', 'shiptrack'),
+                            'label' => __('Cc', 'sendtrace'),
                             'type' => 'select',
                             'required' => false,
                             'class' => 'selectize',
-                            'options' => $shiptrack->get_setting('email_admin', 'admin_cc',  array()),
-                            'value' => $shiptrack->get_setting('email_admin', 'admin_cc'),
+                            'options' => $sendtrace->get_setting('email_admin', 'admin_cc',  array()),
+                            'value' => $sendtrace->get_setting('email_admin', 'admin_cc'),
                             'placeholder' => 'sample@gmail.com',
                             'description' => '<strong>Note:</strong> Type and select to add new item',
                             'extras' => 'multiple data-has_remove="true" data-allow_create="true"',
@@ -346,12 +346,12 @@ class WPSTField
                         ),
                         array(
                             'key' => 'admin_bcc',
-                            'label' => __('Bcc', 'shiptrack'),
+                            'label' => __('Bcc', 'sendtrace'),
                             'type' => 'select',
                             'required' => false,
                             'class' => 'selectize',
-                            'options' => $shiptrack->get_setting('email_admin', 'admin_bcc',  array()),
-                            'value' => $shiptrack->get_setting('email_admin', 'admin_bcc'),
+                            'options' => $sendtrace->get_setting('email_admin', 'admin_bcc',  array()),
+                            'value' => $sendtrace->get_setting('email_admin', 'admin_bcc'),
                             'description' => '<strong>Note:</strong> Type and select to add new item',
                             'placeholder' => 'sample@gmail.com',
                             'extras' => 'multiple data-has_remove="true" data-allow_create="true"',
@@ -359,21 +359,21 @@ class WPSTField
                         ),
                         array(
                             'key' => 'admin_subject',
-                            'label' => __('Subject', 'shiptrack'),
+                            'label' => __('Subject', 'sendtrace'),
                             'type' => 'text',
                             'required' => true,
                             'class' => 'form-control',
-                            'value' => $shiptrack->get_setting('email_admin', 'admin_subject', 'New Booking'),     
+                            'value' => $sendtrace->get_setting('email_admin', 'admin_subject', 'New Booking'),     
                             'placeholder' => 'New Booking',                       
                             'setting' => 'email_admin',
                         ),
                         array(
                             'key' => 'admin_body',
-                            'label' => __('Body', 'shiptrack'),
+                            'label' => __('Body', 'sendtrace'),
                             'type' => 'textarea',
                             'required' => true,
                             'class' => 'form-control',
-                            'value' => $shiptrack->get_setting_html('email_admin', 'admin_body', ''),     
+                            'value' => $sendtrace->get_setting_html('email_admin', 'admin_body', ''),     
                             'placeholder' => wpst_get_default_admin_mail_body(),                       
                             'extras' => 'rows=6',
                             'allow_html' => true,
@@ -381,11 +381,11 @@ class WPSTField
                         ),
                         array(
                             'key' => 'admin_footer',
-                            'label' => __('Footer', 'shiptrack'),
+                            'label' => __('Footer', 'sendtrace'),
                             'type' => 'textarea',
                             'required' => true,
                             'class' => 'form-control',
-                            'value' => $shiptrack->get_setting_html('email_admin', 'admin_footer'),
+                            'value' => $sendtrace->get_setting_html('email_admin', 'admin_footer'),
                             'placeholder' => wpst_get_default_admin_mail_footer(),
                             'extras' => 'rows=4',
                             'allow_html' => true,
@@ -396,17 +396,17 @@ class WPSTField
             ),
             'email_client' => array(
                 array(
-                    'heading' => esc_html__('Client Email Setting', 'shiptrack'),
+                    'heading' => esc_html__('Client Email Setting', 'sendtrace'),
                     'fields' => array(
                         array(
                             'key' => 'client_enable',
-                            'label' => __('Enable?', 'shiptrack'),
+                            'label' => __('Enable?', 'sendtrace'),
                             'type' => 'radio',
                             'required' => true,
                             'class' => '',
                             'group_class' => 'form-check-inline',
                             'options' => array('Yes', 'No'),
-                            'value' => $shiptrack->get_setting('email_client', 'client_enable', 'Yes'),
+                            'value' => $sendtrace->get_setting('email_client', 'client_enable', 'Yes'),
                             'setting' => 'email_client'
                         ),
                         array(
@@ -420,12 +420,12 @@ class WPSTField
                         ),
                         array(
                             'key' => 'client_mail_to',
-                            'label' => __('Mail To', 'shiptrack'),
+                            'label' => __('Mail To', 'sendtrace'),
                             'type' => 'select',
                             'required' => true,
                             'class' => 'selectize',
-                            'options' => $shiptrack->get_setting('email_client', 'client_mail_to', array('{wpst_shipper_email}')),
-                            'value' => $shiptrack->get_setting('email_client', 'client_mail_to', '{wpst_shipper_email}'),
+                            'options' => $sendtrace->get_setting('email_client', 'client_mail_to', array('{wpst_shipper_email}')),
+                            'value' => $sendtrace->get_setting('email_client', 'client_mail_to', '{wpst_shipper_email}'),
                             'placeholder' => 'sample@gmail.com',
                             'description' => '<strong>Note:</strong> Type and select to add new item',
                             'extras' => 'multiple data-has_remove="true" data-allow_create="true"',
@@ -433,12 +433,12 @@ class WPSTField
                         ),
                         array(
                             'key' => 'client_cc',
-                            'label' => __('Cc', 'shiptrack'),
+                            'label' => __('Cc', 'sendtrace'),
                             'type' => 'select',
                             'required' => false,
                             'class' => 'selectize',
-                            'options' => $shiptrack->get_setting('email_client', 'client_cc', array()),
-                            'value' => $shiptrack->get_setting('email_client', 'client_cc'),
+                            'options' => $sendtrace->get_setting('email_client', 'client_cc', array()),
+                            'value' => $sendtrace->get_setting('email_client', 'client_cc'),
                             'placeholder' => 'sample@gmail.com',
                             'description' => '<strong>Note:</strong> Type and select to add new item',
                             'extras' => 'multiple data-has_remove="true" data-allow_create="true"',
@@ -446,12 +446,12 @@ class WPSTField
                         ),
                         array(
                             'key' => 'client_bcc',
-                            'label' => __('Bcc', 'shiptrack'),
+                            'label' => __('Bcc', 'sendtrace'),
                             'type' => 'select',
                             'required' => false,
                             'class' => 'selectize',
-                            'options' => $shiptrack->get_setting('email_client', 'client_bcc', array()),
-                            'value' => $shiptrack->get_setting('email_client', 'client_bcc'),
+                            'options' => $sendtrace->get_setting('email_client', 'client_bcc', array()),
+                            'value' => $sendtrace->get_setting('email_client', 'client_bcc'),
                             'description' => '<strong>Note:</strong> Type and select to add new item',
                             'placeholder' => 'sample@gmail.com',
                             'extras' => 'multiple data-has_remove="true" data-allow_create="true"',
@@ -459,21 +459,21 @@ class WPSTField
                         ),
                         array(
                             'key' => 'client_subject',
-                            'label' => __('Subject', 'shiptrack'),
+                            'label' => __('Subject', 'sendtrace'),
                             'type' => 'text',
                             'required' => true,
                             'class' => 'form-control',
-                            'value' => $shiptrack->get_setting('email_client', 'client_subject', 'Shipment Tracking No. #{shiptrack_shipment_no}'),     
-                            'placeholder' => 'Shipment Tracking No. #{shiptrack_shipment_no}',                       
+                            'value' => $sendtrace->get_setting('email_client', 'client_subject', 'Shipment Tracking No. #{tracking_no}'),     
+                            'placeholder' => 'Shipment Tracking No. #{tracking_no}',                       
                             'setting' => 'email_client',
                         ),
                         array(
                             'key' => 'client_body',
-                            'label' => __('Body', 'shiptrack'),
+                            'label' => __('Body', 'sendtrace'),
                             'type' => 'textarea',
                             'required' => true,
                             'class' => 'form-control',
-                            'value' => $shiptrack->get_setting_html('email_client', 'client_body'),     
+                            'value' => $sendtrace->get_setting_html('email_client', 'client_body'),     
                             'placeholder' => wpst_get_default_client_mail_body(),                       
                             'extras' => 'rows=6',
                             'allow_html' => true,
@@ -481,11 +481,11 @@ class WPSTField
                         ),
                         array(
                             'key' => 'client_footer',
-                            'label' => __('Footer', 'shiptrack'),
+                            'label' => __('Footer', 'sendtrace'),
                             'type' => 'textarea',
                             'required' => true,
                             'class' => 'form-control',
-                            'value' => $shiptrack->get_setting_html('email_client', 'client_footer'),
+                            'value' => $sendtrace->get_setting_html('email_client', 'client_footer'),
                             'placeholder' => wpst_get_default_client_mail_footer(),
                             'extras' => 'rows=4',
                             'allow_html' => true,
@@ -499,11 +499,11 @@ class WPSTField
     }
 
     function multiple_package() {
-        global $shiptrack;
+        global $sendtrace;
         $fields = array(
             'qty' => array(
                 'key' => 'qty',
-                'label' => __('Qty', 'shiptrack'),
+                'label' => __('Qty', 'sendtrace'),
                 'type' => 'number',
                 'class' => 'qty',
                 'unit' => 'pcs',
@@ -511,47 +511,47 @@ class WPSTField
             ),
             'package_type' => array(
                 'key' => 'package_type',
-                'label' => __('Package Type', 'shiptrack'),
+                'label' => __('Package Type', 'sendtrace'),
                 'type' => 'select',
-                'options' => $shiptrack->package_types(),
+                'options' => $sendtrace->package_types(),
                 'field_col' => '',
                 'class' => 'package_type',
                 'order' => 2
             ),
             'weight' => array(
                 'key' => 'weight',
-                'label' => __('Weight', 'shiptrack'),
+                'label' => __('Weight', 'sendtrace'),
                 'type' => 'number',
                 'extras' => 'step=any min=0',
                 'class' => 'weight',
-                'unit' => $shiptrack->weight_unit_used(),
+                'unit' => $sendtrace->weight_unit_used(),
                 'order' => 3
             ),
             'length' => array(
                 'key' => 'length',
-                'label' => __('Length', 'shiptrack'),
+                'label' => __('Length', 'sendtrace'),
                 'type' => 'number',
                 'extras' => 'step=any min=0',
                 'class' => 'length',
-                'unit' => $shiptrack->dim_unit_used(),
+                'unit' => $sendtrace->dim_unit_used(),
                 'order' => 4
             ),
             'width' => array(
                 'key' => 'width',
-                'label' => __('Width', 'shiptrack'),
+                'label' => __('Width', 'sendtrace'),
                 'type' => 'number',
                 'extras' => 'step=any min=0',
                 'class' => 'width',
-                'unit' => $shiptrack->dim_unit_used(),
+                'unit' => $sendtrace->dim_unit_used(),
                 'order' => 5
             ),
             'height' => array(
                 'key' => 'height',
-                'label' => __('Height', 'shiptrack'),
+                'label' => __('Height', 'sendtrace'),
                 'type' => 'number',
                 'extras' => 'step=any min=0',
                 'class' => 'height',
-                'unit' => $shiptrack->dim_unit_used(),
+                'unit' => $sendtrace->dim_unit_used(),
                 'order' => 6
             )
         );
@@ -572,40 +572,40 @@ class WPSTField
     }
 
     function history_fields($shipment_id=0, $side_bar=false) {
-        global $shiptrack;
-        $status_label = $side_bar ? __('New Status', 'shiptrack') : __('Status', 'shiptrack');
+        global $sendtrace;
+        $status_label = $side_bar ? __('New Status', 'sendtrace') : __('Status', 'sendtrace');
         $fields = array(
-            'shiptrack_status' => array(
-                'key' => 'shiptrack_status',
+            'sendtrace_status' => array(
+                'key' => 'sendtrace_status',
                 'label' => $status_label,
                 'type' => 'select',
-                'options' => $shiptrack->status_list(),
+                'options' => $sendtrace->status_list(),
                 'value' => !$shipment_id ? wpst_get_default_status() : '',
             ),
-            'shiptrack_datetime' => array(
-                'key' => 'shiptrack_datetime',
-                'label' => __('Date Time', 'shiptrack'),
+            'sendtrace_datetime' => array(
+                'key' => 'sendtrace_datetime',
+                'label' => __('Date Time', 'sendtrace'),
                 'type' => 'text',
                 'class' => 'wpst-datetimepicker',
                 'value' => '',
             ),
             'remarks' => array(
                 'key' => 'remarks',
-                'label' => __('Remarks', 'shiptrack'),
+                'label' => __('Remarks', 'sendtrace'),
                 'type' => 'textarea',
                 'value' => '',
                 'extras' => 'rows=auto'
             ),
             'updated_by' => array(
                 'key' => 'updated_by',
-                'label' => __('Updated By', 'shiptrack'),
+                'label' => __('Updated By', 'sendtrace'),
                 'type' => 'text',
                 'value' => '',
                 'extras' => 'readonly'
             ),
         );
         if ($side_bar) {
-            unset($fields['shiptrack_datetime']);
+            unset($fields['sendtrace_datetime']);
             unset($fields['updated_by']);
         }
         return apply_filters('wpst_history_fields', $fields);
@@ -634,8 +634,8 @@ class WPSTField
                 'label' => wpst_customer_field('receiver', 'label'),
                 'class' => 'receiver',
             ),
-            'shiptrack_status' => array(
-                'key' => 'shiptrack_status',
+            'sendtrace_status' => array(
+                'key' => 'sendtrace_status',
                 'label' => 'Status',
                 'class' => 'status'
             ),

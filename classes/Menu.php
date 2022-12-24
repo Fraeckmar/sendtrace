@@ -36,7 +36,7 @@ class WPSTMenu
             wpst_shipment_label(),
             'edit_posts',
             wpst_plugin_slug().'-item',
-            array($this, 'wpst_shiptrack_post')
+            array($this, 'wpst_sendtrace_post')
         );
 
         // Settings
@@ -46,23 +46,23 @@ class WPSTMenu
             wpst_settings_label(),
             'manage_options',
             wpst_plugin_slug().'-settings',
-            array($this, 'wpst_shiptrack_settings')
+            array($this, 'wpst_sendtrace_settings')
         );
 
         // Report
         add_submenu_page(
             wpst_plugin_slug(),
-            __('Reports', 'shiptrack'),
-            __('Reports', 'shiptrack'),
+            __('Reports', 'sendtrace'),
+            __('Reports', 'sendtrace'),
             'manage_options',
             wpst_plugin_slug().'-report',
-            array($this, 'wpst_shiptrack_reports')
+            array($this, 'wpst_sendtrace_reports')
         );
     }
 
     function wpst_manage_shipments()
     {
-        global $shiptrack, $WPSTField;
+        global $sendtrace, $WPSTField;
         $plugin_slug = wpst_plugin_slug();
         if (!isset($_GET['page']) && wpst_sanitize_data($_GET['page']) != $plugin_slug) { 
             return false; 
@@ -70,7 +70,7 @@ class WPSTMenu
 
         $current_user_role = wpst_get_user_role();
         $user_is_admin = wpst_is_user_admin();
-        $assigned_role = str_replace('shiptrack_', '', $current_user_role);
+        $assigned_role = str_replace('sendtrace_', '', $current_user_role);
         $user_can_delete = wpst_shipment_user_can('delete');
         $user_can_update = wpst_shipment_user_can('update');
         $last_shipment_date = wpst_get_last_date_of_shipments();
@@ -85,7 +85,7 @@ class WPSTMenu
         $q_shipment = isset($_GET['q_shipment']) && !empty($_GET['q_shipment']) ? sanitize_text_field($_GET['q_shipment'])  : '';
         $q_shipper_name = isset($_GET[wpst_customer_field('shipper', 'key')]) ? sanitize_text_field($_GET[wpst_customer_field('shipper', 'key')]) : '';
         $q_receiver_name = isset($_GET[wpst_customer_field('receiver', 'key')]) ? sanitize_text_field($_GET[wpst_customer_field('receiver', 'key')]) : '';
-        $q_shiptrack_status = isset($_GET['shiptrack_status']) ? sanitize_text_field($_GET['shiptrack_status']) : '';
+        $q_sendtrace_status = isset($_GET['sendtrace_status']) ? sanitize_text_field($_GET['sendtrace_status']) : '';
         $date_from = isset($_GET['date_from']) ? sanitize_text_field($_GET['date_from']) : date(wpst_date_format(), strtotime(date("Y-{$last_month}-1")));
         $date_to = isset($_GET['date_to']) ? sanitize_text_field($_GET['date_to']) : date(wpst_date_format(), strtotime(date("Y-{$last_month}-{$last_day}")));
 
@@ -111,15 +111,15 @@ class WPSTMenu
                 'compare' => '='
             );
         }
-        if (!empty($q_shiptrack_status)) {
+        if (!empty($q_sendtrace_status)) {
             $meta_query[] = array(
-                'key' => 'shiptrack_status',
-                'value' => $q_shiptrack_status,
+                'key' => 'sendtrace_status',
+                'value' => $q_sendtrace_status,
                 'compare' => '='
             );
         }
 
-        if (!$user_is_admin && (!wpst_editor_can_acess_all_shipments() && $current_user_role == 'shiptrack_editor')) {
+        if (!$user_is_admin && (!wpst_editor_can_acess_all_shipments() && $current_user_role == 'sendtrace_editor')) {
             $meta_query[] = array(
                 'key' => 'assigned_'.$assigned_role,
                 'value' => get_current_user_id(),
@@ -132,7 +132,7 @@ class WPSTMenu
         
         // Active Shipments Query
         $active_args = array(
-            'post_type'         => 'shiptrack',
+            'post_type'         => 'sendtrace',
             'post_status'       => 'publish',
             'posts_per_page'    => $post_per_page,
             'paged'             => $paged,
@@ -173,7 +173,7 @@ class WPSTMenu
         }
 
         $trash_args = array(
-            'post_type'         => 'shiptrack',
+            'post_type'         => 'sendtrace',
             'post_status'       => 'trash',
             'posts_per_page'    => $post_per_page,
             'paged'             => $paged,
@@ -199,12 +199,12 @@ class WPSTMenu
         require_once wpst_get_template('shipments.tpl');
     }
 
-    function wpst_shiptrack_post()
+    function wpst_sendtrace_post()
     {
-        global $shiptrack, $WPSTField;
+        global $sendtrace, $WPSTField;
         $plugin_slug = wpst_plugin_slug();
         $shipment_id = isset($_GET['id']) && is_numeric(wpst_sanitize_data($_GET['id'])) ? wpst_sanitize_data($_GET['id']) : 0;
-        $shiptrack_status = !empty($shipment_id) ? wpst_sanitize_data(get_post_meta($shipment_id, 'shiptrack_status', true)) : '';
+        $sendtrace_status = !empty($shipment_id) ? wpst_sanitize_data(get_post_meta($shipment_id, 'sendtrace_status', true)) : '';
         $action = isset($_GET['action']) ? wpst_sanitize_data($_GET['action']) : 'new';
         if ($action == 'edit' && !$shipment_id) {
             $action = 'new';
@@ -215,7 +215,7 @@ class WPSTMenu
             $form_fields = !empty($WPSTField->fields()) ? $WPSTField->fields($shipment_id) : array();
             $title = in_array($action, array('view', 'edit')) ? get_the_title($shipment_id) : '';
             if ($action == 'new' && wpst_is_tracking_auto_generate()) {
-                $title = $shiptrack->generate_tracking_no();
+                $title = $sendtrace->generate_tracking_no();
             }
         }
         $role_action = $action;
@@ -236,18 +236,18 @@ class WPSTMenu
         }        
     }
 
-    function wpst_shiptrack_settings()
+    function wpst_sendtrace_settings()
     {
-        global $shiptrack, $WPSTField;
+        global $sendtrace, $WPSTField;
         $current_tab = isset($_GET['tab']) && !empty($_GET['tab']) ? wpst_sanitize_data($_GET['tab']) : 'general';
         $general_setting_fields = array_key_exists('general', $WPSTField->settings_field()) ? $WPSTField->settings_field()['general'] : array();
         $admin_email_fields = array_key_exists('email_admin', $WPSTField->settings_field()) ? $WPSTField->settings_field()['email_admin'] : array();
         $client_email_fields = array_key_exists('email_client', $WPSTField->settings_field()) ? $WPSTField->settings_field()['email_client'] : array();
 
-        echo "<div id='shiptrack-admin' class='wrap shiptrack'>";
+        echo "<div id='sendtrace-admin' class='wrap sendtrace'>";
             require_once(WPST_PLUGIN_PATH. 'templates/admin/settings/navigation.tpl.php');
             echo "<div id='wpst-setting-content' class='p-1'>";
-                foreach ($shiptrack->settings_menu() as $menu_key => $menu) {
+                foreach ($sendtrace->settings_menu() as $menu_key => $menu) {
                     $menu_key = sanitize_key($menu_key);
                     require_once $menu['file_path'];
                 }
@@ -255,14 +255,14 @@ class WPSTMenu
         echo "</div>";
     }
 
-    function wpst_shiptrack_reports()
+    function wpst_sendtrace_reports()
     {
-        global $shiptrack;
-        $status_list = $shiptrack->status_list();
-        $client_list = wpst_get_users_list(['shiptrack_client']);
+        global $sendtrace;
+        $status_list = $sendtrace->status_list();
+        $client_list = wpst_get_users_list(['sendtrace_client']);
         $assigned_client = isset($_POST['assigned_client']) ? wpst_sanitize_data($_POST['assigned_client']) : '';
         $shipper_name = isset($_POST['wpst_shipper_name']) ? wpst_sanitize_data($_POST['wpst_shipper_name']) : '';
-        $shiptrack_status = isset($_POST['shiptrack_status']) ? wpst_sanitize_data($_POST['shiptrack_status']) : '';
+        $sendtrace_status = isset($_POST['sendtrace_status']) ? wpst_sanitize_data($_POST['sendtrace_status']) : '';
         $date_from = isset($_POST['date_from']) ? wpst_sanitize_data($_POST['date_from']) : '';
         $date_to = isset($_POST['date_to']) ? wpst_sanitize_data($_POST['date_to']) : '';
         require_once wpst_get_template('admin/reports.tpl');

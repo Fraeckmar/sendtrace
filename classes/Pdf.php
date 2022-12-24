@@ -20,8 +20,8 @@ class WPSTPdf
 
     function print($type)
     {
-        global $shiptrack;
-        $font_family = $shiptrack->get_setting('advance_dashboard', 'print_font_family', 'Helvetica');
+        global $sendtrace;
+        $font_family = $sendtrace->get_setting('advance_dashboard', 'print_font_family', 'Helvetica');
         $paper = $this->get_paper_type($type);
         $pdf_dpi  = apply_filters('wpst_pdf_dpi', 160);
 
@@ -60,10 +60,10 @@ class WPSTPdf
             'filename' => ''
         );
 
-        $shiptrack->clean_files('pdf');
-        if (file_put_contents($shiptrack->files_dir_path.$filename.'.pdf', $output)) {
+        $sendtrace->clean_files('pdf');
+        if (file_put_contents($sendtrace->files_dir_path.$filename.'.pdf', $output)) {
             $result = array(
-                'fileurl' => $shiptrack->files_dir_url.$filename.'.pdf',
+                'fileurl' => $sendtrace->files_dir_url.$filename.'.pdf',
                 'filename' => $filename
             );
         }
@@ -72,9 +72,9 @@ class WPSTPdf
 
     function get_pdf_content($type, $sub_folder='')
     {
-        global $shiptrack, $WPSTField;
-        $font_size = $shiptrack->get_setting('advance_dashboard', 'print_font_size', 26);
-        $logo_id = $shiptrack->get_setting('general', 'company_logo', 0);
+        global $sendtrace, $WPSTField;
+        $font_size = $sendtrace->get_setting('advance_dashboard', 'print_font_size', 26);
+        $logo_id = $sendtrace->get_setting('general', 'company_logo', 0);
         $data = array(
             'site_info' => array(
                 'site_url' => get_bloginfo('url'),
@@ -110,7 +110,7 @@ class WPSTPdf
                 $data['shipment'] = array(
                     'shipment_id' => $shipment_id,
                     'tracking_no' => get_the_title($shipment_id),
-                    'barcode_url' => $shiptrack->generate_barcode_url($shipment_id, $type),
+                    'barcode_url' => $sendtrace->generate_barcode_url($shipment_id, $type),
                     'packages' => wpst_get_packages_data($shipment_id),                
                     'custom_fields' => $WPSTField->fields($shipment_id)
                 );

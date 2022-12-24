@@ -22,10 +22,10 @@ echo "<div id='{$menu_key}-container' class='shadow-lg tab-container p-3 ".(($cu
         }
         echo "</div>";
         echo "<div class='col-md-6'>";
-            do_action('shiptrack_info');
+            do_action('sendtrace_info');
         echo "</div>";        
         echo "<div class='col-12 p-2'>";
-            WPSTForm::gen_button('btn_submit', __('Save Settings', 'shiptrack'), 'submit', 'btn btn-success');
+            WPSTForm::gen_button('btn_submit', __('Save Settings', 'sendtrace'), 'submit', 'btn btn-success');
         echo "</div>";
     echo "</div>";
 echo "</div>";

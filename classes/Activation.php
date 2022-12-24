@@ -9,17 +9,17 @@ class WPSTActivation
     public function add_roles()
     {
         // Client
-        $client_role = get_role('shiptrack_client');
+        $client_role = get_role('sendtrace_client');
         if (!$client_role) {
-            add_role('shiptrack_client', 'Shiptrack Client', array(
+            add_role('sendtrace_client', 'SendTrace Client', array(
                 'read' => true,
             ));
         }
         
         // Editor
-        $editor_role = get_role('shiptrack_editor');
+        $editor_role = get_role('sendtrace_editor');
         if (!$editor_role) {
-            add_role('shiptrack_editor', 'Shiptrack Editor', array(
+            add_role('sendtrace_editor', 'SendTrace Editor', array(
                 'read' => true,
                 'create_posts' => true,
                 'edit_posts' => true,
@@ -30,9 +30,9 @@ class WPSTActivation
         }     
         
         // Agent
-        $editor_role = get_role('shiptrack_agent');
+        $editor_role = get_role('sendtrace_agent');
         if (!$editor_role) {
-            add_role('shiptrack_agent', 'Shiptrack Agent', array(
+            add_role('sendtrace_agent', 'SendTrace Agent', array(
                 'read' => true,
                 'create_posts' => true,
                 'edit_posts' => true,

@@ -35,20 +35,20 @@ if (!empty($package_data) && !empty($package_data[0]['qty'])) {
             // Cubic Meter
             echo "<div id='cubic-meter' class='col-md-4 col-sm-12'>";
                 echo "<span class='label font-weight-bold'>".esc_html(wpst_cubic_unit_label('meter'))."</span>: ";
-                echo "<span class='value'>".esc_html($shiptrack->get_package_totals($shipment_id)['cubic'])."</span> ";
-                echo "<span class='symbol'>".esc_html($shiptrack->get_symbol_unit('meter'))."<sup>3</sup></span>";
+                echo "<span class='value'>".esc_html($sendtrace->get_package_totals($shipment_id)['cubic'])."</span> ";
+                echo "<span class='symbol'>".esc_html($sendtrace->get_symbol_unit('meter'))."<sup>3</sup></span>";
             echo "</div>";
             // Volumetric Weight
             echo "<div id='volumetric-weight' class='col-md-4 col-sm-12'>";
                 echo "<span class='label font-weight-bold'>".esc_html(wpst_volumetric_weight_label())."</span>: ";
-                echo "<span class='value'>".esc_html($shiptrack->get_package_totals($shipment_id)['volumetric_weight'])."</span> ";
-                echo "<span class='symbol'>".esc_html($shiptrack->get_symbol_unit('weight'))."</span>";
+                echo "<span class='value'>".esc_html($sendtrace->get_package_totals($shipment_id)['volumetric_weight'])."</span> ";
+                echo "<span class='symbol'>".esc_html($sendtrace->get_symbol_unit('weight'))."</span>";
             echo "</div>";
             // Actual Weight
             echo "<div id='actual-weight' class='col-md-4 col-sm-12'>";
                 echo "<span class='label font-weight-bold'>".esc_html(wpst_actuual_weight_label())."</span>: ";
-                echo "<span class='value'>".esc_html($shiptrack->get_package_totals($shipment_id)['actual_weight'])."</span> ";
-                echo "<span class='symbol'>".esc_html($shiptrack->get_symbol_unit('weight'))."</span>";
+                echo "<span class='value'>".esc_html($sendtrace->get_package_totals($shipment_id)['actual_weight'])."</span> ";
+                echo "<span class='symbol'>".esc_html($sendtrace->get_symbol_unit('weight'))."</span>";
             echo "</div>";
         echo "</div>";
     echo "</div>";

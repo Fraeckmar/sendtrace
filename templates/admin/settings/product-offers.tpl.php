@@ -8,7 +8,7 @@
 		</span>
 		<div class="collapse" id="advanceDashboardAddon">
 			<div class="card card-body m-0 mt-1">
-				Provides advanced dashboard for your site and allow your client(s) to have their own dashboard. Using shortcode [shiptrack_dashboard].
+				Provides advanced dashboard for your site and allow your client(s) to have their own dashboard. Using shortcode [wpshipment_dashboard].
 			</div>
 		</div>
 

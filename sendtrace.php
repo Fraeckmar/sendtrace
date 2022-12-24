@@ -1,16 +1,16 @@
 <?php
 /*
- * Plugin Name: ShipTrack - Shipments
- * Description: Shiptract is designed to provide information to your shippers and consignees, technology solution for shipments and logistics operations. It has core features to manage shipments in easy way, printing of shipment's documents, track shipments and notify your customers about their shipment status.
- * Author: <a href="https://join.skype.com/invite/yT6ad4cNTTJM">shiptrack</a>
- * Text Domain: shiptrack
+ * Plugin Name: SendTrace - Shipments
+ * Description: SendTrace - Shipments is designed to provide information to your shippers and consignees, technology solution for shipments and logistics operations. It has core features to manage shipments in easy way, printing of shipment's documents, track shipments and notify your customers about their shipment status.
+ * Author: <a href="https://join.skype.com/invite/yT6ad4cNTTJM">wpshiptrack</a>
+ * Text Domain: sendtrace
  * Domain Path: /languages
  * Version: 1.0.0
  */
 
  /** 
-  * ShipTrack - Shipments
-  * Copyright (C) 2022  shiptrack
+  * SendTrace - Shipments
+  * Copyright (C) 2022  wpshiptrack
   */
 
 if (!defined('ABSPATH')) {
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
 }
 
 /** Defined constant */
-define('WPST_TEXTDOMAIN', 'shiptrack');
+define('WPST_TEXTDOMAIN', 'sendtrace');
 define('WPST_VERSION', '1.0.0');
 define('WPST_DB_VERSION', '1.0.0');
 define('WPST_FILE_DIR', __FILE__);
@@ -37,7 +37,7 @@ require_once WPST_PLUGIN_PATH. 'classes/Menu.php';
 require_once WPST_PLUGIN_PATH. 'classes/Hook.php';
 require_once WPST_PLUGIN_PATH. 'classes/Field.php';
 require_once WPST_PLUGIN_PATH. 'classes/Ajax.php';
-require_once WPST_PLUGIN_PATH. 'classes/ShipTrack.php';
+require_once WPST_PLUGIN_PATH. 'classes/SendTrace.php';
 require_once WPST_PLUGIN_PATH. 'classes/Asset.php';
 
 if (is_admin()) {

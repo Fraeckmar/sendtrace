@@ -1,5 +1,5 @@
 jQuery(document).ready(function($){
-    $('.shiptrack .repeater').repeater({
+    $('.sendtrace .repeater').repeater({
         initEmpty: false,
         defaultValues: {},
         isFirstItemUndeletable: false,

@@ -1,7 +1,7 @@
 <?php
 
 function wpst_plugin_slug() {
-    return 'shiptrack';
+    return 'sendtrace';
 }
 
 function wpst_datepicker_format() {
@@ -41,14 +41,14 @@ function wpst_get_currency(){
 }
 
 function wpst_get_amount_applied_tax($amount, $currency=false, $decimals_count=2) {
-    global $shiptrack;
+    global $sendtrace;
     $amount_with_vat = wpst_get_applied_tax($amount) + $amount;
     return wpst_number_format($amount_with_vat, $currency, $decimals_count);
 }
 
 function wpst_get_applied_tax($amount) {
-    global $shiptrack;
-    $vat = ($shiptrack->tax / 100) * $amount;
+    global $sendtrace;
+    $vat = ($sendtrace->tax / 100) * $amount;
     return $vat;
 }
 
@@ -56,7 +56,7 @@ function wpst_get_template($file_name, $admin_tpl=false){
     $file_slug = strtolower( preg_replace('/\s+/', '_', trim( str_replace( '.tpl', '', $file_name ) ) ) );
     $file_slug = preg_replace('/[^A-Za-z0-9_]/', '_', $file_slug );    
     $admin_folder = $admin_tpl ? 'admin/' : '';
-    $template_path   = get_stylesheet_directory()."/shiptrack/{$admin_folder}{$file_name}.php";
+    $template_path   = get_stylesheet_directory()."/sendtrace/{$admin_folder}{$file_name}.php";
     
     if (!file_exists($template_path)) {
         $template_path  = WPST_PLUGIN_PATH."templates/{$admin_folder}{$file_name}.php";
@@ -68,7 +68,7 @@ function wpst_get_template($file_name, $admin_tpl=false){
 function wpst_get_last_date_of_shipments() {
     global $wpdb;
     $sql = "SELECT post_date FROM `{$wpdb->prefix}posts` WHERE post_type = %s AND post_status = 'publish' ORDER BY post_date DESC LIMIT 1";
-    return $wpdb->get_var($wpdb->prepare($sql, 'shiptrack'));
+    return $wpdb->get_var($wpdb->prepare($sql, 'sendtrace'));
 }
 
 function wpst_dd($data, $die=false) {
@@ -154,12 +154,12 @@ function wpst_allowed_html_tags() {
 
 function wpst_address_field() {
     $address_field = array(
-        'country' =>  __('Country', 'shiptrack'),
-        'address_1' => __('Address 1', 'shiptrack'),
-        'address_2' => __('Address 2', 'shiptrack'),
-        'city' => __('Town / City', 'shiptrack'),
-        'state' => __('State / Country', 'shiptrack'),
-        'postcode' => __('Postcode / ZIP', 'shiptrack'),
+        'country' =>  __('Country', 'sendtrace'),
+        'address_1' => __('Address 1', 'sendtrace'),
+        'address_2' => __('Address 2', 'sendtrace'),
+        'city' => __('Town / City', 'sendtrace'),
+        'state' => __('State / Country', 'sendtrace'),
+        'postcode' => __('Postcode / ZIP', 'sendtrace'),
     );
 
     return apply_filters('wpst_address_field', $address_field);
@@ -177,8 +177,8 @@ function for_wpst_assets_only() {
 }
 
 function wpst_bg_color() {
-    global $shiptrack;
-    $color_code = $shiptrack->get_setting('general', 'bg_color');
+    global $sendtrace;
+    $color_code = $sendtrace->get_setting('general', 'bg_color');
     if (empty($color_code)) {
         $color_code = '#ff6b35';
     }
@@ -186,8 +186,8 @@ function wpst_bg_color() {
 }
 
 function wpst_fg_color() {
-    global $shiptrack;
-    return $shiptrack->get_setting('general', 'fg_color', '#ffffff');
+    global $sendtrace;
+    return $sendtrace->get_setting('general', 'fg_color', '#ffffff');
 }
 
 function wpst_get_default_status() {
@@ -196,9 +196,9 @@ function wpst_get_default_status() {
 
 function wpst_get_role_assign_access() {
     $assign_access = array(
-        'shiptrack_client' => array(),
-        'shiptrack_agent' => array('shiptrack_client'),
-        'shiptrack_editor' => array('shiptrack_client', 'shiptrack_agent')
+        'sendtrace_client' => array(),
+        'sendtrace_agent' => array('sendtrace_client'),
+        'sendtrace_editor' => array('sendtrace_client', 'sendtrace_agent')
     );
     return apply_filters('wpst_get_role_assign_access', $assign_access);
 }
@@ -243,9 +243,9 @@ function wpst_get_role_shipment_capabilities($role) {
         return array();
     }
     $role_capabilities = array(
-        'shiptrack_client' => wpst_get_shipment_actions('r'),
-        'shiptrack_agent' => wpst_get_shipment_actions('crud'),
-        'shiptrack_editor' => wpst_get_shipment_actions('rud')
+        'sendtrace_client' => wpst_get_shipment_actions('r'),
+        'sendtrace_agent' => wpst_get_shipment_actions('crud'),
+        'sendtrace_editor' => wpst_get_shipment_actions('rud')
     );
     $role_capabilities = wpst_sanitize_data(apply_filters('wpst_role_shipment_capabilities', $role_capabilities));
     $capabilities = array_key_exists($role, $role_capabilities) ? $role_capabilities[$role] : array();
@@ -283,8 +283,8 @@ function wpst_update_post_status($post_id, $status) {
 }
 
 function wpst_can_modify_history() {
-    global $shiptrack;
-    $roles_can_modify = $shiptrack->get_setting('general', 'roles_modify_history');
+    global $sendtrace;
+    $roles_can_modify = $sendtrace->get_setting('general', 'roles_modify_history');
     $can_modify = false;
     if (wpst_is_user_admin() || (!empty($roles_can_modify) && in_array(wpst_get_user_role(), $roles_can_modify))) {
         $can_modify = true;
@@ -296,7 +296,7 @@ function wpst_get_user_roles() {
     $wp_roles = wp_roles();
     $roles = array();
     foreach ($wp_roles->roles as $role => $info) {
-        if (strpos($role, 'shiptrack') !== false) {
+        if (strpos($role, 'sendtrace') !== false) {
             $roles[$role] = $info['name'];
         }
     }
@@ -350,15 +350,15 @@ function wpst_get_shipment_meta_details($shipment_id) {
 }
 
 function wpst_is_tracking_auto_generate() {
-    global $shiptrack;
-    return $shiptrack->get_setting('general', 'auto_generate', 'Yes') == 'Yes';
+    global $sendtrace;
+    return $sendtrace->get_setting('general', 'auto_generate', 'Yes') == 'Yes';
 }
 function wpst_is_post_modified($post_id) {
     if (!$post_id) {
         return false;
     }
     global $wpdb;
-    $sql = "SELECT * FROM `{$wpdb->prefix}posts` WHERE ID = %d AND post_type = 'shiptrack' AND post_date = post_modified";
+    $sql = "SELECT * FROM `{$wpdb->prefix}posts` WHERE ID = %d AND post_type = 'sendtrace' AND post_date = post_modified";
     $result = $wpdb->get_row($wpdb->prepare($sql, $post_id));
     return empty($result);
 }
@@ -373,11 +373,11 @@ function wpst_customer_field($type='', $retrieve_field='') {
     $field = array(
         'shipper' => array(
             'key' => 'wpst_shipper_name',
-            'label' => __('Shipper Name', 'shiptrack')
+            'label' => __('Shipper Name', 'sendtrace')
         ),
         'receiver' => array(
             'key' => 'wpst_receiver_name',
-            'label' => __('Receiver Name', 'shiptrack')
+            'label' => __('Receiver Name', 'sendtrace')
         )
     );
 
@@ -417,8 +417,8 @@ function wpst_get_shipment_id_by_order($order_id)
 
 function wpst_send_client_email_in_status_list()
 {
-    global $shiptrack;
-    return  $shiptrack->get_setting('email_client', 'enabled_statuses', $shiptrack->status_list());
+    global $sendtrace;
+    return  $sendtrace->get_setting('email_client', 'enabled_statuses', $sendtrace->status_list());
 }
 function wpst_get_default_admin_mail_subject() {
     return "New Booking";
@@ -433,7 +433,7 @@ function wpst_get_default_admin_mail_footer() {
 }
 function wpst_get_default_client_mail_body() {
     $body = "<p> Hi {".esc_html(wpst_customer_field('shipper', 'key'))."},</p>\n";
-    $body .= "<p>Your shipment tracking <strong>#{tracking_no}</strong> was place to {shiptrack_status} status.</p>\n";
+    $body .= "<p>Your shipment tracking <strong>#{tracking_no}</strong> was place to {sendtrace_status} status.</p>\n";
     $body .= "<p>Thank you for getting in touch with us.</p>";
     return $body;
 }
@@ -471,8 +471,8 @@ function wpst_construct_mail_body($email_body, $email_footer, $is_admin_tpl=fals
 }
 
 function wpst_get_email_header_html() {
-    global $shiptrack;
-    $company_logo = esc_url(wp_get_attachment_url($shiptrack->get_setting('general', 'company_logo')));
+    global $sendtrace;
+    $company_logo = esc_url(wp_get_attachment_url($sendtrace->get_setting('general', 'company_logo')));
     $html = "<table width='100%'>";
         $html .= "<tr>";
             if (!empty($company_logo)) {
@@ -485,8 +485,8 @@ function wpst_get_email_header_html() {
 }
 
 function wpst_prepare_html_shortcodes($shipment_id, $html) {
-    global $shiptrack;
-    $shortcode_values = $shiptrack->get_shortcode_values($shipment_id);
+    global $sendtrace;
+    $shortcode_values = $sendtrace->get_shortcode_values($shipment_id);
     foreach ($shortcode_values as $shortcode => $value) {
         $html = str_replace($shortcode, $value, $html);
     }
@@ -508,7 +508,7 @@ function wpst_merge_array_values($assoc_array) {
 }
 
 function wpst_get_packages_data($shipment_id, $data_only=false, $data_is_string=false) {
-    global $shiptrack, $WPSTField;
+    global $sendtrace, $WPSTField;
     $package_fields = $WPSTField->multiple_package();
     $package_data = $shipment_id ? get_post_meta($shipment_id, 'multiple-package', true) : array();
     if (empty($package_data)) {
@@ -517,10 +517,10 @@ function wpst_get_packages_data($shipment_id, $data_only=false, $data_is_string=
     $packages = array(
         'fields' => array_combine(array_column($package_fields, 'key'), array_column($package_fields, 'label')),
         'data' => array(), 'data-item' => array(),
-        'totals' => $shiptrack->get_package_totals($shipment_id, true),
+        'totals' => $sendtrace->get_package_totals($shipment_id, true),
         'units' => array(
-            'weight' => $shiptrack->weight_unit_used(),
-            'dimension' => $shiptrack->dim_unit_used()
+            'weight' => $sendtrace->weight_unit_used(),
+            'dimension' => $sendtrace->dim_unit_used()
         )
     );
     if (!empty($package_data) && !empty($package_fields)) {
@@ -632,7 +632,7 @@ function wpst_draw_form_fields($shipment_id=0, $packages_data=array(), $pkg_type
     if (!empty($form_fields)) {
         foreach($form_fields as $section => $info) {
             do_action("wpst_before_{$section}", $shipment_id);
-            echo "<div id='".esc_html__($section)."' class='mb-3 col-sm-12 col-md-" .esc_html__($info['section_col']). "'>";
+            echo "<div id='".esc_html__($section)."' class='section mb-3 col-sm-12 col-md-" .esc_html__($info['section_col']). "'>";
                 echo "<div class='card p-0 mw-100'>";
                     echo "<div class='card-header' data-bs-toggle='collapse' href='#".esc_html($section)."_toggle' role='button' aria-expanded='false' aria-controls='".$section."_toggle'>";
                         echo "<h5 class='h4 m-0'>" .esc_html__($info['heading']). "</h5>";
@@ -660,9 +660,9 @@ function wpst_pagination($args=array()) {
     $defaults = array(
         'range' => 4,
         'custom_query' => FALSE,
-        'previous_string' => __( 'Previous', 'shiptrack' ),
-        'next_string' => __( 'Next', 'shiptrack' ),
-        'before_output' => '<nav class="post-nav" aria-label="'.__('Booking Pagination', 'shiptrack').'"><ul class="pagination pg-blue justify-content-center">',
+        'previous_string' => __( 'Previous', 'sendtrace' ),
+        'next_string' => __( 'Next', 'sendtrace' ),
+        'before_output' => '<nav class="post-nav" aria-label="'.__('Booking Pagination', 'sendtrace').'"><ul class="pagination pg-blue justify-content-center">',
         'after_output' => '</ul></nav>'
     );
     
@@ -707,10 +707,10 @@ function wpst_pagination($args=array()) {
     
     $firstpage = wpst_sanitize_data(get_pagenum_link(1));
     if ($firstpage && (1 != $page)) {
-        $echo .= '<li class="previous page-item"><a class="btn btn-sm color-primary page-link waves-effect waves-effect" href="' . esc_url($firstpage) . '">' . esc_html__( 'First', 'shiptrack' ) . '</a></li>';
+        $echo .= '<li class="previous page-item"><a class="btn btn-sm color-primary page-link waves-effect waves-effect" href="' . esc_url($firstpage) . '">' . esc_html__( 'First', 'sendtrace' ) . '</a></li>';
     }
     if ($previous && (1 != $page)) {
-        $echo .= '<li class="page-item" ><a class="btn btn-sm color-primary page-link waves-effect waves-effect" href="' . esc_url($previous) . '" title="' . esc_html__( 'previous', 'shiptrack') . '">' . wpst_sanitize_data($args['previous_string']) . '</a></li>';
+        $echo .= '<li class="page-item" ><a class="btn btn-sm color-primary page-link waves-effect waves-effect" href="' . esc_url($previous) . '" title="' . esc_html__( 'previous', 'sendtrace') . '">' . wpst_sanitize_data($args['previous_string']) . '</a></li>';
     }
     
     if (!empty($min) && !empty($max)) {
@@ -726,12 +726,12 @@ function wpst_pagination($args=array()) {
     $next = intval($page) + 1;
     $next = wpst_sanitize_data(get_pagenum_link($next));
     if ($next && ($count != $page)) {
-        $echo .= '<li class="page-item"><a class="btn btn-sm color-primary page-link waves-effect waves-effect" href="' . esc_url($next) . '" title="' . esc_html__( 'next', 'shiptrack') . '">' . $args['next_string'] . '</a></li>';
+        $echo .= '<li class="page-item"><a class="btn btn-sm color-primary page-link waves-effect waves-effect" href="' . esc_url($next) . '" title="' . esc_html__( 'next', 'sendtrace') . '">' . $args['next_string'] . '</a></li>';
     }
     
     $lastpage = wpst_sanitize_data(get_pagenum_link($count));
     if ($lastpage) {
-        $echo .= '<li class="next page-item"><a class="btn btn-sm color-primary page-link waves-effect waves-effect" href="' . esc_url($lastpage) . '">' . esc_html__( 'Last', 'shiptrack' ) . '</a></li>';
+        $echo .= '<li class="next page-item"><a class="btn btn-sm color-primary page-link waves-effect waves-effect" href="' . esc_url($lastpage) . '">' . esc_html__( 'Last', 'sendtrace' ) . '</a></li>';
     }
     if (isset($echo)) {
         echo $args['before_output'] . $echo . $args['after_output'];

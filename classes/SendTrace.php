@@ -1,6 +1,6 @@
 <?php
 
-class ShipTrack
+class SendTrace
 {
     public $files_dir_path = WPST_PLUGIN_PATH. 'tmp/';
     public $files_dir_url = WPST_PLUGIN_URL. 'tmp/';
@@ -8,7 +8,7 @@ class ShipTrack
 
     function __construct()
     {
-        add_shortcode('shiptrack_form', array($this, 'wpst_tracking_form'));
+        add_shortcode('sendtrace_form', array($this, 'wpst_tracking_form'));
         add_action('admin_init', array($this, 'wpst_admin_nonce_form'));
         add_action('admin_init', array($this, 'wpst_post_type_nonce_form'));
         $this->tax = $this->get_setting('general', 'tax', 0);
@@ -23,14 +23,14 @@ class ShipTrack
 
     function generate_tracking_no()
     {
-        global $shiptrack;
-        $prefix = $shiptrack->get_setting('general', 'tracking_no_prefix', 'SHIP');
-        $suffix = $shiptrack->get_setting('general', 'tracking_no_suffix');
-        $length = $shiptrack->get_setting('general', 'tracking_no_length', 8);
+        global $sendtrace;
+        $prefix = $sendtrace->get_setting('general', 'tracking_no_prefix', 'SHIP');
+        $suffix = $sendtrace->get_setting('general', 'tracking_no_suffix');
+        $length = $sendtrace->get_setting('general', 'tracking_no_length', 8);
         $min_num = str_pad('1', $length, '1');
         $max_num = str_pad('9', $length, '9');
         $track_no = $prefix.wp_rand($min_num, $max_num).$suffix;
-        while ($shiptrack->is_tracking_no_exist($track_no)) {
+        while ($sendtrace->is_tracking_no_exist($track_no)) {
             $track_no = $prefix.wp_rand($min_num, $max_num).$suffix;
         }
         $track_no = apply_filters('wpst_generate_tracking_no', $track_no);
@@ -40,15 +40,15 @@ class ShipTrack
     function is_tracking_no_exist($traking_no)
     {
         global $wpdb;
-        $sql = "SELECT ID FROM `{$wpdb->prefix}posts` WHERE post_type = 'shiptrack' AND post_title = %s";
+        $sql = "SELECT ID FROM `{$wpdb->prefix}posts` WHERE post_type = 'sendtrace' AND post_title = %s";
         $result = $wpdb->get_var($wpdb->prepare($sql, $traking_no));
         return !empty($result);
     }
 
-    function is_shiptrack_post($post_id)
+    function is_sendtrace_post($post_id)
     {
         global $wpdb;
-        $sql = "SELECT post_title FROM `{$wpdb->prefix}posts` WHERE post_type = 'shiptrack' AND ID = %d";
+        $sql = "SELECT post_title FROM `{$wpdb->prefix}posts` WHERE post_type = 'sendtrace' AND ID = %d";
         $result = $wpdb->get_var($wpdb->prepare($sql, $post_id));
         return !empty($result);
     }
@@ -63,16 +63,16 @@ class ShipTrack
             $show_form = false;
         }
         ob_start();
-        echo "<div class='shiptrack'>";
+        echo "<div class='sendtrace'>";
         if ($show_form) {
             require_once wpst_get_template('track-form.tpl');
         }
                 
         if (
-            (isset($_POST['shiptrack_trackform_field']) && wp_verify_nonce($_POST['shiptrack_trackform_field'], 'shiptrack_trackform_action'))
+            (isset($_POST['sendtrace_trackform_field']) && wp_verify_nonce($_POST['sendtrace_trackform_field'], 'sendtrace_trackform_action'))
             || (isset($_GET['tracking_no']) && isset($_GET['action']) && in_array($_GET['action'], array('track', 'view')))
         ) {
-            $shipment = get_page_by_title($tracking_no, OBJECT, 'shiptrack');
+            $shipment = get_page_by_title($tracking_no, OBJECT, 'sendtrace');
             if (empty($shipment)) {
                 echo "<h3 class='h3 text-danger text-center mt-5'>No Result Found.</h3>";
             } else {
@@ -107,8 +107,8 @@ class ShipTrack
 
     function status_list()
     {
-        global $shiptrack;
-        $general =  $shiptrack->get_setting('general');
+        global $sendtrace;
+        $general =  $sendtrace->get_setting('general');
         $status_list_default = array(
             'Cancelled',
             'Delivered',
@@ -127,8 +127,8 @@ class ShipTrack
 
     function shipment_types()
     {
-        global $shiptrack;
-        $general =  $shiptrack->get_setting('general');
+        global $sendtrace;
+        $general =  $sendtrace->get_setting('general');
         $shipment_types_default = array(
             'Air Freight',
             'International Freight',
@@ -141,8 +141,8 @@ class ShipTrack
 
     function carriers()
     {
-        global $shiptrack;
-        $general =  $shiptrack->get_setting('general');
+        global $sendtrace;
+        $general =  $sendtrace->get_setting('general');
         $carriers_default = array(
             'DHL',
             'UPS',
@@ -154,8 +154,8 @@ class ShipTrack
 
     function package_types()
     {
-        global $shiptrack;
-        $general =  $shiptrack->get_setting('general');
+        global $sendtrace;
+        $general =  $sendtrace->get_setting('general');
         $types_default = array(
             'Carton',
             'Pallet',
@@ -182,12 +182,12 @@ class ShipTrack
     {
         $settings_menu = array(
             'general' => array(
-                'label' => __('General Setting', 'shiptrack'),
+                'label' => __('General Setting', 'sendtrace'),
                 'file_path' => wpst_get_template('settings/general.tpl', true),
                 'in_save_setting' => true
             ),
             'email' => array(
-                'label' => __('Email Setting', 'shiptrack'),
+                'label' => __('Email Setting', 'sendtrace'),
                 'file_path' => wpst_get_template('settings/email.tpl', true),
                 'in_save_setting' => true
             )
@@ -324,8 +324,8 @@ class ShipTrack
         global $WPSTField;
         // Save Shipment Post
         if (
-            isset($_POST['shiptrack_post_nonce_field']) && 
-            wp_verify_nonce($_POST['shiptrack_post_nonce_field'], 'shiptrack_post_nonce_action')
+            isset($_POST['sendtrace_post_nonce_field']) && 
+            wp_verify_nonce($_POST['sendtrace_post_nonce_field'], 'sendtrace_post_nonce_action')
         ) {
             $post_fields = $WPSTField->fields();
             $shipment_id = 0;
@@ -336,7 +336,7 @@ class ShipTrack
                 return false;
             }
 
-            if (isset($_GET['id']) && is_numeric($_GET['id']) && $this->is_shiptrack_post(wpst_sanitize_data($_GET['id']))) {
+            if (isset($_GET['id']) && is_numeric($_GET['id']) && $this->is_sendtrace_post(wpst_sanitize_data($_GET['id']))) {
                 $shipment_id = wpst_sanitize_data($_GET['id']);
             }
             
@@ -348,10 +348,10 @@ class ShipTrack
                 if ($shipment_id) {
                     $post_args['ID'] = $shipment_id;
                     wp_update_post($post_args);
-                    $old_status = get_post_meta($shipment_id, 'shiptrack_status',  true);
+                    $old_status = get_post_meta($shipment_id, 'sendtrace_status',  true);
                 }
             } else {
-                $post_args['post_type'] = 'shiptrack';
+                $post_args['post_type'] = 'sendtrace';
                 $post_args['post_status'] = 'publish';
                 $post_args['post_author'] = get_current_user_id() ?? 0;
                 $shipment_id = wp_insert_post($post_args);
@@ -374,13 +374,13 @@ class ShipTrack
                 }
             }
 
-            // Save shiptrack status
-            if (isset($_POST['shiptrack_status']) && !empty($_POST['shiptrack_status'])) {
-                update_post_meta($shipment_id, 'shiptrack_status', wpst_sanitize_data($_POST['shiptrack_status']));
+            // Save sendtrace status
+            if (isset($_POST['sendtrace_status']) && !empty($_POST['sendtrace_status'])) {
+                update_post_meta($shipment_id, 'sendtrace_status', wpst_sanitize_data($_POST['sendtrace_status']));
             } else if ($action == 'new') {
-                update_post_meta($shipment_id, 'shiptrack_status', wpst_get_default_status());
+                update_post_meta($shipment_id, 'sendtrace_status', wpst_get_default_status());
             }
-            // Save shiptrack assigned users
+            // Save sendtrace assigned users
             if (isset($_POST['assigned_client'])) {
                 update_post_meta($shipment_id, 'assigned_client', wpst_sanitize_data($_POST['assigned_client']));
             }
@@ -404,8 +404,8 @@ class ShipTrack
             $notif_action = $action == 'edit' ? 'updated' : 'added';
             $booking_title = $shipment_id ? get_the_title($shipment_id) : '';
             wpst_set_notification("<strong>{$booking_title}</strong> {$notif_action} successfully!");
-            do_action('wpst_after_save_shiptrack_post', $shipment_id, $_POST, $old_status);
-            do_action('wpst_after_save_shiptrack_post_send_email', $shipment_id, $_POST, $old_status);
+            do_action('wpst_after_save_sendtrace_post', $shipment_id, $_POST, $old_status);
+            do_action('wpst_after_save_sendtrace_post_send_email', $shipment_id, $_POST, $old_status);
         }
     }
 
@@ -415,7 +415,7 @@ class ShipTrack
         $shortcodes = array(
             'general' => array(
                 '{tracking_no}' => 'Shpment Number',
-                '{shiptrack_status}' => 'Shipment Status',
+                '{sendtrace_status}' => 'Shipment Status',
             )
         );
         if (!empty($WPSTField->fields())) {
@@ -434,7 +434,7 @@ class ShipTrack
 
     function get_shortcode_values($shipment_id)
     {
-        global $shiptrack, $WPSTField;
+        global $sendtrace, $WPSTField;
         $shipment_fields = $WPSTField->shipment_fields_only();
         $meta_values = wpst_get_shipment_meta_details($shipment_id);
         $shortcodes_list = $this->get_shortcode_list();
@@ -477,8 +477,8 @@ class ShipTrack
                 echo "<table class='table table-bordered'>";
                     echo "<thead>";
                         echo "<tr>";
-                            echo "<td class='p-2'><strong>".__('Shortcode', 'shiptrack')."</strong></td>";
-                            echo "<td class='p-2'><strong>".__('Description', 'shiptrack')."</strong></td>";
+                            echo "<td class='p-2'><strong>".__('Shortcode', 'sendtrace')."</strong></td>";
+                            echo "<td class='p-2'><strong>".__('Description', 'sendtrace')."</strong></td>";
                         echo "<tr>";
                     echo "</thead>";
                     echo "<tbody>";
@@ -521,8 +521,8 @@ class ShipTrack
 
     function dim_unit_used()
     {
-        global $shiptrack;
-        return $shiptrack->get_setting('general', 'dim_unit', 'cm');;
+        global $sendtrace;
+        return $sendtrace->get_setting('general', 'dim_unit', 'cm');;
     }
     function weight_unit_used()
     {
@@ -531,11 +531,11 @@ class ShipTrack
 
     function get_symbol_unit($unit)
     {
-        global $shiptrack;
+        global $sendtrace;
         $symbol = '';
         switch ($unit) {
             case 'weight':
-                $symbol = $shiptrack->get_setting('general', 'weight_unit', 'kg');
+                $symbol = $sendtrace->get_setting('general', 'weight_unit', 'kg');
                 break;
             case 'melimeter':
                 $symbol = 'mm';
@@ -584,8 +584,8 @@ class ShipTrack
 
     function get_volumetric_weight_divisor()
     {
-        global $shiptrack;
-        return $shiptrack->get_setting('general', 'volumetric_weight_divisor', 5000);
+        global $sendtrace;
+        return $sendtrace->get_setting('general', 'volumetric_weight_divisor', 5000);
     }
 
     function get_cubic_meter_divisor()
@@ -680,4 +680,4 @@ class ShipTrack
     }
 }
 
-$shiptrack = new ShipTrack;
+$sendtrace = new SendTrace;

@@ -15,7 +15,7 @@ echo "<div id='multiple-package' class='col-sm-12 mb-3'>";
                                 echo "</th>";
                             }
                             if ($allow_add_delete) {
-                                echo "<th>".__('Action', 'shiptrack')."</th>";
+                                echo "<th>".__('Action', 'sendtrace')."</th>";
                             }                            
                         echo "</tr>";
                     }
@@ -35,7 +35,7 @@ echo "<div id='multiple-package' class='col-sm-12 mb-3'>";
                                         echo "</td>";
                                     }
                                     if ($allow_add_delete) {
-                                        echo "<td><span data-repeater-delete class='btn btn-sm text-white bg-danger item-delete'>".__('Delete', 'shiptrack')."</span></td>";
+                                        echo "<td><span data-repeater-delete class='btn btn-sm text-white bg-danger item-delete'>".__('Delete', 'sendtrace')."</span></td>";
                                     }
                                 echo "</tr>";
                             }
@@ -47,7 +47,7 @@ echo "<div id='multiple-package' class='col-sm-12 mb-3'>";
                                     echo "</td>";
                                 }
                                 if ($allow_add_delete) {
-                                    echo "<td><span data-repeater-delete class='btn btn-sm text-white bg-danger item-delete'>".__('Delete', 'shiptrack')."</span></td>";
+                                    echo "<td><span data-repeater-delete class='btn btn-sm text-white bg-danger item-delete'>".__('Delete', 'sendtrace')."</span></td>";
                                 }
                             echo "</tr>";
                         }
@@ -57,7 +57,7 @@ echo "<div id='multiple-package' class='col-sm-12 mb-3'>";
                     echo "<tfoot>";
                         echo "<tr>";
                             echo "<td colspan='".esc_html(count($package_fields)+1)."' align='right'>";
-                                echo "<span type='button' data-repeater-create class='btn btn-sm text-white btn-info item-add'>".__('Add', 'shiptrack')."</span>";
+                                echo "<span type='button' data-repeater-create class='btn btn-sm text-white btn-info item-add'>".__('Add', 'sendtrace')."</span>";
                             echo "</td>";
                         echo "</tr>";
                     echo "</tfoot>";
@@ -68,20 +68,20 @@ echo "<div id='multiple-package' class='col-sm-12 mb-3'>";
                     // Cubic Meter
                     echo "<div id='cubic-meter' class='col-md-4 col-sm-12'>";
                         echo "<span class='label'>".esc_html(wpst_cubic_unit_label('meter'))."</span>: ";
-                        echo "<span class='value font-weight-bold'>".esc_html($shiptrack->get_package_totals($shipment_id)['cubic'])."</span> ";
-                        echo "<span class='symbol font-weight-bold'>".esc_html($shiptrack->get_symbol_unit('meter'))."<sup>3</sup></span>";
+                        echo "<span class='value font-weight-bold'>".esc_html($sendtrace->get_package_totals($shipment_id)['cubic'])."</span> ";
+                        echo "<span class='symbol font-weight-bold'>".esc_html($sendtrace->get_symbol_unit('meter'))."<sup>3</sup></span>";
                     echo "</div>";
                     // Volumetric Weight
                     echo "<div id='volumetric-weight' class='col-md-4 col-sm-12'>";
                         echo "<span class='label'>".esc_html(wpst_volumetric_weight_label())."</span>: ";
-                        echo "<span class='value font-weight-bold'>".esc_html($shiptrack->get_package_totals($shipment_id)['volumetric_weight'])."</span> ";
-                        echo "<span class='symbol font-weight-bold'>".esc_html($shiptrack->get_symbol_unit('weight'))."</span>";
+                        echo "<span class='value font-weight-bold'>".esc_html($sendtrace->get_package_totals($shipment_id)['volumetric_weight'])."</span> ";
+                        echo "<span class='symbol font-weight-bold'>".esc_html($sendtrace->get_symbol_unit('weight'))."</span>";
                     echo "</div>";
                     // Actual Weight
                     echo "<div id='actual-weight' class='col-md-4 col-sm-12'>";
                         echo "<span class='label'>".esc_html(wpst_actuual_weight_label())."</span>: ";
-                        echo "<span class='value font-weight-bold'>".esc_html($shiptrack->get_package_totals($shipment_id)['actual_weight'])."</span> ";
-                        echo "<span class='symbol font-weight-bold'>".esc_html($shiptrack->get_symbol_unit('weight'))."</span>";
+                        echo "<span class='value font-weight-bold'>".esc_html($sendtrace->get_package_totals($shipment_id)['actual_weight'])."</span> ";
+                        echo "<span class='symbol font-weight-bold'>".esc_html($sendtrace->get_symbol_unit('weight'))."</span>";
                     echo "</div>";
                 echo "</div>";
             }

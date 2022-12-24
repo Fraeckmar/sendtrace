@@ -5,7 +5,7 @@ class WPSTForm
     {
         $form_attribute = '';
         if (!array_key_exists('name', $attributes)) {
-            $attributes['name'] = 'shiptrack';
+            $attributes['name'] = 'sendtrace';
         }
         if (!array_key_exists('method', $attributes)) {
             $attributes['method']= 'post';
@@ -39,7 +39,7 @@ class WPSTForm
 
     public static function gen_field($field=array(), $with_form_group=false, $allow_html=false)
     {
-        global $shiptrack, $WPSTCountry;
+        global $sendtrace, $WPSTCountry;
 
         if (empty($field)) { return false; }
         $label = array_key_exists('label', $field) ? wp_kses_data($field['label']) : '';
@@ -60,7 +60,7 @@ class WPSTForm
         $label_class = array_key_exists('label_class', $field) ? wpst_sanitize_data($field['label_class']) : '';
         $group_class = array_key_exists('group_class', $field) ? wpst_sanitize_data($field['group_class']) : '';
         $options = array_key_exists('options', $field) ? wpst_sanitize_data($field['options']) : array();
-        $field_class = array_key_exists($type, $shiptrack->field_class()) ? $shiptrack->field_class()[$type] : '';
+        $field_class = array_key_exists($type, $sendtrace->field_class()) ? $sendtrace->field_class()[$type] : '';
         $setting = array_key_exists('setting', $field) ? $field['setting'] : '';
         $field_name = !empty($setting) ? $setting.'['.$key.']' : $key;
         $required = array_key_exists('required', $field) ? $field['required'] : false;

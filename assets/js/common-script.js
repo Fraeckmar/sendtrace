@@ -2,15 +2,15 @@ jQuery(document).ready(function($){
     const NOTIFICATION = WPSTAjax.notification;
     const LOADING_HTML = '<div class="wpst-loading text-info text-center h3"> <span class="spinner-grow spinner-border-sm"></span></div>';
     window.show_notification = function(message, type='success', icon = "check"){
-        let shiptrack_elem = null;
-        if ($('body').find('.shiptrack').length) {
-            shiptrack_elem = $('body').find('.shiptrack');
+        let sendtrace_elem = null;
+        if ($('body').find('.sendtrace').length) {
+            sendtrace_elem = $('body').find('.sendtrace');
         }
-        if ($('body.shiptrack').length) {
-            shiptrack_elem = $('body.shiptrack');
+        if ($('body.sendtrace').length) {
+            sendtrace_elem = $('body.sendtrace');
         }
-        if (shiptrack_elem) {
-            shiptrack_elem.append(
+        if (sendtrace_elem) {
+            sendtrace_elem.append(
                 '<div class="wpst-notif alert alert-'+type+'" role="alert">'+
                     '<span class="fa fa-lg fa-'+icon+'-circle"></span> '+ message +
                     '<span class="wpst-notif-dismiss">&times;</span>'+
@@ -23,7 +23,7 @@ jQuery(document).ready(function($){
         }, 6000);
 	}
     window.show_loading = function() {
-        $('.shiptrack').append(LOADING_HTML);
+        $('.sendtrace').append(LOADING_HTML);
     }
     window.hide_loading = function() {
         $('body').find('.wpst-loading').remove();
@@ -199,7 +199,7 @@ jQuery(document).ready(function($){
             }            
         });
         if (!shipment_ids.length) {
-            show_notification('Please select shipment(s) to delete.', 'danger', 'info');
+            show_notification('Please select shipment(s) to '+status+'.', 'danger', 'info');
             return false;
         }
         if (!status) {
@@ -276,7 +276,7 @@ jQuery(document).ready(function($){
         });
     }
 
-    $('.shiptrack-print-option').on('click', '.dropdown-item', function(){
+    $('.sendtrace-print-option').on('click', '.dropdown-item', function(){
         let shipment_id = $(this).data('id');
         let type = $(this).data('type');
         let error = '';
@@ -312,9 +312,9 @@ jQuery(document).ready(function($){
         }        
     });
 
-    $('.shiptrack-list').on('click', '.shiptrack-item', function(){
+    $('.sendtrace-list').on('click', '.sendtrace-item', function(){
         let active_class = $(this).data('active_class');
-        $(this).closest('.shiptrack-list').find('.shiptrack-item').removeClass(active_class);
+        $(this).closest('.sendtrace-list').find('.sendtrace-item').removeClass(active_class);
         $(this).addClass(active_class);
     });
     

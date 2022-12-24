@@ -7,7 +7,7 @@ jQuery(document).ready(function($){
     $('.wpst-datepicker').datetimepicker(date_picker_format);
     $('.wpst-datetimepicker').datetimepicker(datetime_picker_format);
 
-    $('.shiptrack').on('keydown', '.wpst-timepicker, .wpst-datepicker, .wpst-datetimepicker', function(){
+    $('.sendtrace').on('keydown', '.wpst-timepicker, .wpst-datepicker, .wpst-datetimepicker', function(){
         return false;
     });
 });

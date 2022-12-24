@@ -8,8 +8,8 @@ if (!empty($history_data)) {
                 }
                 echo "<div class='status-item text-center'>";
                     echo "<div class='circle-icon'><i class='fa fa-circle fa-2x ".($idx == count($history_data)-1 ? 'color-primary' : '')."'></i></div>";
-                    echo "<div class='status-label ".($idx == count($history_data)-1 ? 'current' : '')."'>".esc_html($history['shiptrack_status'])."</div>";
-                    echo "<div class='status-date ".($idx == count($history_data)-1 ? 'current' : '')."'>".esc_html(date(wpst_date_format(), strtotime($history['shiptrack_datetime'])))."</div>";
+                    echo "<div class='status-label ".($idx == count($history_data)-1 ? 'current' : '')."'>".esc_html($history['sendtrace_status'])."</div>";
+                    echo "<div class='status-date ".($idx == count($history_data)-1 ? 'current' : '')."'>".esc_html(date(wpst_date_format(), strtotime($history['sendtrace_datetime'])))."</div>";
                 echo "</div>";
             }
         echo "</div>";

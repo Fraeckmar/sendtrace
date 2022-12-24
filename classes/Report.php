@@ -4,18 +4,18 @@ class WPSTReport
 {
     function create_report($headers, $data, $format='csv', $file_name='')
     {
-        global $shiptrack;
-        $formats = $shiptrack->export_file_format_list();
+        global $sendtrace;
+        $formats = $sendtrace->export_file_format_list();
         $format = array_key_exists($format, $formats) ? $format : 'csv';
         $delimeter = array_key_exists($format, $formats) ? $formats[$format] : ',';
         $file_directory = WPST_PLUGIN_PATH."tmp".DIRECTORY_SEPARATOR;
         if (empty($file_name)) {
-            $file_name = "shiptrack-report-".time().'.'.trim($format);
+            $file_name = "sendtrace-report-".time().'.'.trim($format);
         } else {
             $file_name .= '.'.trim($format);
         }
         $file_url = WPST_PLUGIN_URL."tmp".DIRECTORY_SEPARATOR.$file_name;
-        $shiptrack->clean_files('csv');
+        $sendtrace->clean_files('csv');
         $csv_file = fopen($file_directory.$file_name, "w");	
         
 

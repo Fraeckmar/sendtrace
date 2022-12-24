@@ -10,7 +10,7 @@ class WPSTAsset
 
     function wpst_enqueue_admin_scripts()
     {
-        global $shiptrack;
+        global $sendtrace;
         require_once(WPST_PLUGIN_PATH. 'assets/css-root.php');
 
         /// Styles
@@ -20,7 +20,7 @@ class WPSTAsset
         wp_enqueue_style('wpst-fontawesome', WPST_PLUGIN_URL. 'assets/css/font-awesome.min.css', array(), WPST_VERSION);
         wp_enqueue_style('wpst-bootstrap-datetimepicker', WPST_PLUGIN_URL. 'assets/css/bootstrap-datetimepicker.min.css', array(), WPST_VERSION);
         wp_enqueue_style('wpst-tailwind', WPST_PLUGIN_URL. 'assets/css/tailwind.css', array(), WPST_VERSION);
-        wp_enqueue_style('wpst-shiptrack', WPST_PLUGIN_URL. 'assets/css/admin/shiptrack.css', array(), WPST_VERSION);
+        wp_enqueue_style('wpst-sendtrace', WPST_PLUGIN_URL. 'assets/css/admin/sendtrace.css', array(), WPST_VERSION);
         wp_enqueue_style('wpst-common', WPST_PLUGIN_URL. 'assets/css/common-styles.css', array(), WPST_VERSION);
         wp_enqueue_style('wpst-datatable', WPST_PLUGIN_URL. 'assets/css/dataTables.bootstrap5.min.css', array(), WPST_VERSION);
         if (for_wpst_assets_only()) {
@@ -54,25 +54,25 @@ class WPSTAsset
 
     function wpst_enqueue_frontend_scripts()
     {
-        global $post, $shiptrack;
+        global $post, $sendtrace;
         require_once(WPST_PLUGIN_PATH. 'assets/css-root.php');
         $enqueue_shptrack_assets = apply_filters('enqueue_shptrack_assets' , false);
         
-        if (is_a($post, 'WP_Post') && (has_shortcode($post->post_content, 'shiptrack_form') || $enqueue_shptrack_assets)) {
+        if (is_a($post, 'WP_Post') && (has_shortcode($post->post_content, 'sendtrace_form') || $enqueue_shptrack_assets)) {
             // Styles
             wp_enqueue_style('wpst-main', WPST_PLUGIN_URL. 'assets/css/main.min.css', array(), WPST_VERSION);
             wp_enqueue_style('wpst-selectize', WPST_PLUGIN_URL. 'assets/css/selectize.bootstrap5.min.css', array(), WPST_VERSION);
             wp_enqueue_style('wpst-selectize-helper', WPST_PLUGIN_URL. 'assets/css/selectize-helper.css', array(), WPST_VERSION);
             wp_enqueue_style('wpst-fontawesome', WPST_PLUGIN_URL. 'assets/css/font-awesome.min.css', array(), WPST_VERSION);
             wp_enqueue_style('wpst-bootstrap-datetimepicker', WPST_PLUGIN_URL. 'assets/css/bootstrap-datetimepicker.min.css', array(), WPST_VERSION);
-            wp_enqueue_style('wpst-shiptrack', WPST_PLUGIN_URL. 'assets/css/admin/shiptrack.css', array(), WPST_VERSION);
+            wp_enqueue_style('wpst-sendtrace', WPST_PLUGIN_URL. 'assets/css/admin/sendtrace.css', array(), WPST_VERSION);
             wp_enqueue_style('wpst-common', WPST_PLUGIN_URL. 'assets/css/common-styles.css', array(), WPST_VERSION);
         }
     }
 
     function ajax_translation()
     {
-        global $shiptrack;
+        global $sendtrace;
         $time_picker_format = new stdClass;
         $time_picker_format->format = 'hh:mm a';
         $date_picker_format = new stdClass;
@@ -80,8 +80,8 @@ class WPSTAsset
         $datetime_picker_format = new stdClass;
         $datetime_picker_format->format = wpst_calendar_datetime_format();
         $dim_divisor = array(
-            'cubic' => $shiptrack->get_cubic_meter_divisor(),
-            'volumetric' => $shiptrack->get_volumetric_weight_divisor()
+            'cubic' => $sendtrace->get_cubic_meter_divisor(),
+            'volumetric' => $sendtrace->get_volumetric_weight_divisor()
         );
 
         $translation = array(

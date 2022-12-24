@@ -48,15 +48,15 @@
     color: #fff;
 }
 
-.shiptrack .selectize-control {
+.sendtrace .selectize-control {
     border: 1px solid #bdbdbd;
     border-radius: 0.25rem;
 }
 
-.shiptrack .file-upload-container {
+.sendtrace .file-upload-container {
     position: relative;
 }
-.shiptrack .remove-file {
+.sendtrace .remove-file {
     padding: 1px;
     position: absolute;
     line-height: 0;
@@ -64,7 +64,7 @@
     top: -2px;
     cursor: pointer;
 }
-.shiptrack .remove-file:hover {
+.sendtrace .remove-file:hover {
     color: #c71919;
     font-weight: 800;
 }
@@ -102,24 +102,24 @@
     color: #adadad;
 }
 #track-result .heading {
-    border-bottom: 1px solid var(--shiptrack-bg);
+    border-bottom: 1px solid var(--sendtrace-bg);
     text-transform: uppercase;
 }
 #track-result #tracking-no {
-    border: 1px solid var(--shiptrack-bg);
-    color: var(--shiptrack-bg);
+    border: 1px solid var(--sendtrace-bg);
+    color: var(--sendtrace-bg);
     font-size: 34px;
     font-weight: 600;
     text-align: center;
 }
-.shiptrack .primary-fg {
-    color: var(--shiptrack-color);
+.sendtrace .primary-fg {
+    color: var(--sendtrace-color);
 }
-.shiptrack .form-control.focus-primary:focus {
-    box-shadow: inset 0 0 0 1px var(--shiptrack-bg);
-    border-color: var(--shiptrack-bg);
+.sendtrace .form-control.focus-primary:focus {
+    box-shadow: inset 0 0 0 1px var(--sendtrace-bg);
+    border-color: var(--sendtrace-bg);
 }
-.shiptrack .form-control.no-border-color:focus {
+.sendtrace .form-control.no-border-color:focus {
     border-color: unset;
 }
 

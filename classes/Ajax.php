@@ -19,7 +19,7 @@ class WPSTAjax
         $meta_key = isset($_POST['meta_key']) ? wpst_sanitize_data($_POST['meta_key']) : '';
         $q = isset($_POST['q']) ? wpst_sanitize_data($_POST['q']) : '';
 
-        $sql = "SELECT DISTINCT pm.meta_value FROM `{$wpdb->prefix}posts` p INNER JOIN `{$wpdb->prefix}postmeta` pm ON p.ID = pm.post_id WHERE p.post_type = 'shiptrack' AND p.post_status = 'publish' AND pm.meta_key = '{$meta_key}' AND pm.meta_value LIKE '%{$q}%'";
+        $sql = "SELECT DISTINCT pm.meta_value FROM `{$wpdb->prefix}posts` p INNER JOIN `{$wpdb->prefix}postmeta` pm ON p.ID = pm.post_id WHERE p.post_type = 'sendtrace' AND p.post_status = 'publish' AND pm.meta_key = '{$meta_key}' AND pm.meta_value LIKE '%{$q}%'";
         $results = $wpdb->get_results($sql);
         if (!empty($results)) {
             $new_result = array();
@@ -79,10 +79,10 @@ class WPSTAjax
     // Generate Report
     function wpst_generate_report()
     {
+        global $sendtrace, $WPSTField;
         require_once WPST_PLUGIN_PATH. 'classes/Report.php';
         $report = new WPSTReport;
 
-        global $shiptrack, $WPSTField;
         $assigned_client = isset($_POST['assigned_client']) && is_numeric($_POST['assigned_client']) ? sanitize_text_field($_POST['assigned_client']) : 0;
         $shipper = isset($_POST['shipper']) ? sanitize_text_field($_POST['shipper']) : '';
         $status = isset($_POST['status']) ? sanitize_text_field($_POST['status']) : '';
@@ -99,7 +99,7 @@ class WPSTAjax
         }
         if (!empty($status)) {
             $meta_query[] = array(
-                'key' => 'shiptrack_status',
+                'key' => 'sendtrace_status',
                 'value' => trim($status),
                 'compare' => '='
             );
@@ -112,7 +112,7 @@ class WPSTAjax
             );
         }
         $args = array(
-            'post_type' => 'shiptrack',
+            'post_type' => 'sendtrace',
             'post_status' => 'publish',
             'posts_per_page' => -1,
             'meta_query' => array(
@@ -145,26 +145,26 @@ class WPSTAjax
         $custom_fields = $WPSTField->fields();
 
         if (empty($posts)) {
-            $result['error'] = __('No record(s) found.', 'shiptrack');
+            $result['error'] = __('No record(s) found.', 'sendtrace');
         }
         if (empty($custom_fields)) {
-            $result['error'] = __('Custom fields is empty.', 'shiptrack');
+            $result['error'] = __('Custom fields is empty.', 'sendtrace');
         }
 
         $report_data = array();
         $report_headers = array(
-            'tracking_no' => __('Tracking No.', 'shiptrack'), 
-            'post_date' => __('Date Created', 'shiptrack'),
-            'shiptrack_status' => __('Status', 'shiptrack'),
-            'assigned_client' => __('Assigned Client', 'shiptrack')
+            'tracking_no' => __('Tracking No.', 'sendtrace'), 
+            'post_date' => __('Date Created', 'sendtrace'),
+            'sendtrace_status' => __('Status', 'sendtrace'),
+            'assigned_client' => __('Assigned Client', 'sendtrace')
         );        
 
         if (!empty($posts) && !empty($custom_fields)) {
             foreach ($posts as $post) {
-                $meta_values = $shiptrack->get_shipment_details($post->ID);
+                $meta_values = $sendtrace->get_shipment_details($post->ID);
                 $report_data[$post->ID]['tracking_no'] = $post->post_title;
                 $report_data[$post->ID]['post_date'] = date(wpst_date_format(), strtotime($post->post_date));
-                $report_data[$post->ID]['shiptrack_status'] = get_post_meta($post->ID, 'shiptrack_status', true);
+                $report_data[$post->ID]['sendtrace_status'] = get_post_meta($post->ID, 'sendtrace_status', true);
                 $report_data[$post->ID]['assigned_client'] = wpst_get_user_data(get_post_meta($post->ID, 'assigned_client', true), 'display_name');
                 foreach ($custom_fields as $section) {
                     foreach ($section['fields'] as $field) {
@@ -180,7 +180,7 @@ class WPSTAjax
             
                 $report_data[$post->ID]['packages'] = wpst_get_packages_data($post->ID, true, true);
             }
-            $report_headers['packages'] = __('Pacakges', 'shiptrack');
+            $report_headers['packages'] = __('Pacakges', 'sendtrace');
         }
 
         $format = wpst_sanitize_data(apply_filters('wpst_report_file_format', 'csv'));

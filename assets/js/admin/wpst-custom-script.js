@@ -10,8 +10,8 @@ jQuery(document).ready(function($){
         let newUrl = base_url+'&tab='+current_tab;
         change_current_url(newUrl);
 
-        $('#shiptrack-admin .tab-container').removeClass('active');
-        $('#shiptrack-admin').find(tab_container).addClass('active');
+        $('#sendtrace-admin .tab-container').removeClass('active');
+        $('#sendtrace-admin').find(tab_container).addClass('active');
         $('#wpst-navigation .btn').removeClass('active');
         $(this).addClass('active');
     }); 
@@ -42,7 +42,7 @@ jQuery(document).ready(function($){
         e.preventDefault();
         let date_from = $(this).find('#date_from').val();
         let date_to = $(this).find('#date_to').val();
-        let status = $(this).find('#shiptrack_status').val();
+        let status = $(this).find('#sendtrace_status').val();
         let shipper = $(this).find('#'+SHIPPER_FIELD.key).val();
         let assigned_client = $(this).find('#assigned_client').val();
 
@@ -61,6 +61,7 @@ jQuery(document).ready(function($){
                     show_loading();
                 },
                 success: function(response) {
+                    console.log(response);
                     data = JSON.parse(response);
                     $('#wpst_export_form .alert').removeClass('d-none alert-danger alert-success');
                     if (data.status == 'error') {

@@ -1,12 +1,12 @@
-.shiptrack .card {
+.sendtrace .card {
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
     border: 0;
     font-weight: 400;
 }
-.shiptrack .card, .shiptrack .navbar {
+.sendtrace .card, .sendtrace .navbar {
     -webkit-box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
 }
-.shiptrack .btn {
+.sendtrace .btn {
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
     padding: 0.84rem 2.14rem;
     font-size: .81rem;
@@ -24,41 +24,41 @@
     word-wrap: break-word;
     color: #fff;
 }
-.shiptrack .btn-sm, .shiptrack .btn-group-sm > .btn {
+.sendtrace .btn-sm, .sendtrace .btn-group-sm > .btn {
     padding: 0.25rem 0.5rem;
     font-size: .81rem;
     line-height: 1.5;
     border-radius: 0.2rem;
 }
-.shiptrack .waves-effect {
+.sendtrace .waves-effect {
     position: relative;
     cursor: pointer;
     overflow: hidden;
     -webkit-user-select: none;
     user-select: none;
 }
-.shiptrack ul.bullets {
+.sendtrace ul.bullets {
     list-style-type: disc !important;
     padding-left:1em !important;
     margin-left:1em;
 }
 
-.shiptrack input::placeholder,
-.shiptrack select::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+.sendtrace input::placeholder,
+.sendtrace select::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #adadad !important;
     opacity: 1; /* Firefox */
 }
-.shiptrack input:-ms-input-placeholder,
-.shiptrack select:-ms-input-placeholder { /* Internet Explorer 10-11 */
+.sendtrace input:-ms-input-placeholder,
+.sendtrace select:-ms-input-placeholder { /* Internet Explorer 10-11 */
     color: #adadad !important;
 }
-.shiptrack input::-ms-input-placeholder,
-.shiptrack select::-ms-input-placeholder { /* Microsoft Edge */
+.sendtrace input::-ms-input-placeholder,
+.sendtrace select::-ms-input-placeholder { /* Microsoft Edge */
     color: #adadad !important;
 }
 
 @media (min-width: 1024px) {
-    .shiptrack .form-control.date_picker {
+    .sendtrace .form-control.date_picker {
         width: 50%;
     }
 }

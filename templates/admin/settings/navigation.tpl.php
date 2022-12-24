@@ -3,8 +3,8 @@ $current_tab = isset($_GET['tab']) ? wpst_sanitize_data($_GET['tab']) : 'general
 ?>
 <div id="wpst-navigation" class="wpst-navigation">
     <ul class="d-flex flex-row m-0 p-0">
-        <?php if (!empty($shiptrack->settings_menu())): ?>
-            <?php foreach ($shiptrack->settings_menu() as $menu_key => $menu): 
+        <?php if (!empty($sendtrace->settings_menu())): ?>
+            <?php foreach ($sendtrace->settings_menu() as $menu_key => $menu): 
                 $active_class = ($current_tab == $menu_key) ? 'active' : '';
                 ?>
                 <li class="m-0">

@@ -1,10 +1,10 @@
-<div id="manage-shipments" class="wrap shiptrack advanced-table">
-    <h2><?php esc_html_e('Manage Shipments', 'shiptrack'); ?> <a class="btn btn-sm btn-light" href="<?php echo esc_url(admin_url("admin.php?page={$plugin_slug}-item&action=new")) ?>"><?php esc_html_e('Add New', 'shiptrack'); ?></a></h2>
+<div id="manage-shipments" class="wrap sendtrace advanced-table">
+    <h2><?php esc_html_e('Manage Shipments', 'sendtrace'); ?> <a class="btn btn-sm btn-info" href="<?php echo esc_url(admin_url("admin.php?page={$plugin_slug}-item&action=new")) ?>"><?php esc_html_e('Add New', 'sendtrace'); ?></a></h2>
     <div id="wpst-status-nav" class="row">
         <ul class="subsubsub col-sm-12">
-            <li class="active"><a class="<?php echo $is_active_shipments ? 'current' : '' ?>" href="<?php echo esc_url(admin_url("admin.php?page={$plugin_slug}")) ?>"><?php esc_html_e('Active', 'shiptrack') ?> <span class="count">(<?php echo esc_html($active_count) ?>)</span></a></li>
+            <li class="active"><a class="<?php echo $is_active_shipments ? 'current' : '' ?>" href="<?php echo esc_url(admin_url("admin.php?page={$plugin_slug}")) ?>"><?php esc_html_e('Active', 'sendtrace') ?> <span class="count">(<?php echo esc_html($active_count) ?>)</span></a></li>
             <?php if ($user_can_delete) : ?>
-                | <li class="trash"><a class="<?php echo $is_active_shipments ? '' : 'current' ?>" href="<?php echo esc_url(admin_url("admin.php?page={$plugin_slug}&status=trash")) ?>"><?php esc_html_e('Trash', 'shiptrack') ?> <span class="count">(<?php echo esc_html($trash_count) ?>)</span></a></li>
+                | <li class="trash"><a class="<?php echo $is_active_shipments ? '' : 'current' ?>" href="<?php echo esc_url(admin_url("admin.php?page={$plugin_slug}&status=trash")) ?>"><?php esc_html_e('Trash', 'sendtrace') ?> <span class="count">(<?php echo esc_html($trash_count) ?>)</span></a></li>
             <?php endif; ?>
         </ul>
     </div>
@@ -28,7 +28,7 @@
                 WPSTForm::draw_hidden('page', $plugin_slug);
                 WPSTForm::draw_hidden('date_from', $date_from);
                 WPSTForm::draw_hidden('date_to', $date_to);
-                WPSTForm::draw_hidden('shiptrack_status', $q_shiptrack_status);
+                WPSTForm::draw_hidden('sendtrace_status', $q_sendtrace_status);
                 WPSTForm::draw_hidden(wpst_customer_field('shipper', 'key'), $q_shipper_name);        
                 WPSTForm::draw_hidden(wpst_customer_field('receiver', 'key'), $q_receiver_name);
                 ?>                
@@ -57,7 +57,7 @@
                     } 
                     ?>
                     <?php do_action('wpst_shipment_list_after_head_column'); ?>
-                    <th width="80px" class="p-1 px-2"><?php _e('Print', 'shiptrack'); ?></th>
+                    <th width="80px" class="p-1 px-2"><?php _e('Print', 'sendtrace'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -65,7 +65,7 @@
                     <?php while ($shipments->have_posts()): 
                         $shipments->the_post(); 
                         $shipment_id = get_the_ID();
-                        $meta_values = $shiptrack->get_shipment_details($shipment_id);
+                        $meta_values = $sendtrace->get_shipment_details($shipment_id);
 
                         $read_url = admin_url("admin.php?page={$plugin_slug}-item&action=view&id={$shipment_id}");
                         $update_url = admin_url("admin.php?page={$plugin_slug}-item&action=edit&id={$shipment_id}");
@@ -101,7 +101,7 @@
                                         echo "</a>";
                                     echo "</td>";
                                 } else if ($column['key'] == 'checkbox') {
-                                    echo "<td class='p-1 px-2' style='width: 20px'><input type='checkbox' class='shipment-item' value='".esc_html($shipment_id)."'/></td>";
+                                    echo "<td class='p-1 px-2' style='width: 20px'><input type='checkbox' class='form-check-input shipment-item' value='".esc_html($shipment_id)."'/></td>";
                                 } else {
                                     echo "<td class='p-1 px-2 form-control-sm'>".esc_html($column_value)."</td>";
                                 }
@@ -110,7 +110,7 @@
                         ?>
                         <?php do_action('wpst_shipment_list_after_data_column', $shipment_id); ?>
                         <td>
-                            <div class="dropdown shiptrack-print-option">
+                            <div class="dropdown sendtrace-print-option">
                                 <button class="btn btn-info btn-sm dropdown-toggle m-0 py-1 px-2" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                     <i class="fa fa-print"></i>
                                 </button>
@@ -124,7 +124,7 @@
                     <?php endwhile; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="5" class="p-1 px-2"><?php esc_html_e('No Shipment Found!', 'shiptrack'); ?></td>
+                        <td colspan="5" class="p-1 px-2"><?php esc_html_e('No Shipment Found!', 'sendtrace'); ?></td>
                     </tr>
                 <?php endif; ?>
             </tbody>

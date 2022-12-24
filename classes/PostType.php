@@ -10,27 +10,27 @@ class WPSTPostType
     static function wpst_custom_post_type()
     {
         $labels_menu = array(
-			'name'					=> esc_html_x('Shipment', 'Shipment', 'shiptrack'),
-			'singular_name'			=> esc_html_x('Shipment', 'Shipment', 'shiptrack'),
-			'menu_name' 			=> esc_html__('Shipment', 'shiptrack'),
-			'all_items' 			=> esc_html__('All Shipments', 'shiptrack'),
-			'view_item' 			=> esc_html__('View Shipment', 'shiptrack'),
-			'add_new_item' 			=> esc_html__('Add New Shipment', 'shiptrack'),
-			'add_new' 				=> esc_html__('Add Shipment', 'shiptrack'),
-			'edit_item' 			=> esc_html__('Edit Shipment', 'shiptrack'),
-			'update_item' 			=> esc_html__('Update Shipment', 'shiptrack'),
-			'search_items' 			=> esc_html__('Search Shipment', 'shiptrack'),
-			'not_found' 			=> esc_html__('Shipment Not found', 'shiptrack'),
-			'not_found_in_trash' 	=> esc_html__('Shipment Not found in Trash', 'shiptrack')
+			'name'					=> esc_html_x('Shipment', 'Shipment', 'sendtrace'),
+			'singular_name'			=> esc_html_x('Shipment', 'Shipment', 'sendtrace'),
+			'menu_name' 			=> esc_html__('Shipment', 'sendtrace'),
+			'all_items' 			=> esc_html__('All Shipments', 'sendtrace'),
+			'view_item' 			=> esc_html__('View Shipment', 'sendtrace'),
+			'add_new_item' 			=> esc_html__('Add New Shipment', 'sendtrace'),
+			'add_new' 				=> esc_html__('Add Shipment', 'sendtrace'),
+			'edit_item' 			=> esc_html__('Edit Shipment', 'sendtrace'),
+			'update_item' 			=> esc_html__('Update Shipment', 'sendtrace'),
+			'search_items' 			=> esc_html__('Search Shipment', 'sendtrace'),
+			'not_found' 			=> esc_html__('Shipment Not found', 'sendtrace'),
+			'not_found_in_trash' 	=> esc_html__('Shipment Not found in Trash', 'sendtrace')
 		);
 
-		$shiptrack_supports 			= array( 'title', 'author', 'thumbnail', 'revisions' );
+		$sendtrace_supports 			= array( 'title', 'author', 'thumbnail', 'revisions' );
 		$args_tag         			= array(
-			'label' 				=> esc_html__('Shipment', 'shiptrack'),
-			'description' 			=> esc_html__('Shipment', 'shiptrack'),
+			'label' 				=> esc_html__('Shipment', 'sendtrace'),
+			'description' 			=> esc_html__('Shipment', 'sendtrace'),
 			'labels' 				=> $labels_menu,
-			'supports' 				=> $shiptrack_supports,
-			'taxonomies' 			=> array( 'shiptrack', 'post_tag' ),
+			'supports' 				=> $sendtrace_supports,
+			'taxonomies' 			=> array( 'sendtrace', 'post_tag' ),
 			'menu_icon' 			=> 'dashicons-book-alt',
 			'hierarchical' 			=> true,
 			'public' 				=> true,
@@ -46,7 +46,7 @@ class WPSTPostType
 			'capability_type' 		=> 'post'
 		);
 
-		register_post_type('shiptrack', $args_tag);
+		register_post_type('sendtrace', $args_tag);
     }
 }
 

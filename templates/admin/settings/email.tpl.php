@@ -6,18 +6,18 @@ echo "<div class='wpst-sub-container'>";
             echo "<div class='btn-group btn-group-toggle sub-menus' data-toggle='buttons'>";
                 // Admin
                 echo "<label class='btn btn-sm btn-light m-0 mr-2 ".($sub_tab == 'admin' || $current_tab != $menu_key ? 'active' : '')."'>";
-                    echo "<input type='radio' name='options' id='option1' class='options' data-tab='admin' data-tab_container='#admin-email-container'/> ".__('Admin', 'shiptrack');
+                    echo "<input type='radio' name='options' id='option1' class='options' data-tab='admin' data-tab_container='#admin-email-container'/> ".__('Admin', 'sendtrace');
                 echo "</label>";
                 // Client
                 echo "<label class='btn btn-sm btn-light m-0 ".($sub_tab == 'client' ? 'active' : '')."'>";
-                    echo "<input type='radio' name='options' id='option2' class='options' data-tab='client' data-tab_container='#client-email-container'/> ".__('Client', 'shiptrack');
+                    echo "<input type='radio' name='options' id='option2' class='options' data-tab='client' data-tab_container='#client-email-container'/> ".__('Client', 'sendtrace');
                 echo "</label>";
             echo "</div>";
         echo "</div>";
 
         echo "<div class='row'>";
             echo "<div class='col-md-4 col-sm-12'>";
-                $shiptrack->draw_shortcode_list();
+                $sendtrace->draw_shortcode_list();
             echo "</div>";
             echo "<div class='col-md-8 col-sm-12'>";
                 echo "<div id='admin-email-container' class='wpst-sub-content ".($sub_tab == 'admin' || $current_tab != $menu_key ? 'active' : '')."'>";
