@@ -17,6 +17,7 @@
             <table width="100%">
                 <tr>
                     <td width="50%" align="center">
+                        <!-- image url is encrypted esc_url might not work -->
                         <img width="550px" height="120px" src="<?php echo $data['shipment']['barcode_url'] ?>"/> 
                         <p style="font-size: 34px;"><strong><?php echo esc_html($data['shipment']['tracking_no']) ?></strong></p>
                     </td>

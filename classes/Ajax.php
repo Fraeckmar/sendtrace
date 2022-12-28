@@ -19,8 +19,8 @@ class WPSTAjax
         $meta_key = isset($_POST['meta_key']) ? wpst_sanitize_data($_POST['meta_key']) : '';
         $q = isset($_POST['q']) ? wpst_sanitize_data($_POST['q']) : '';
 
-        $sql = "SELECT DISTINCT pm.meta_value FROM `{$wpdb->prefix}posts` p INNER JOIN `{$wpdb->prefix}postmeta` pm ON p.ID = pm.post_id WHERE p.post_type = 'sendtrace' AND p.post_status = 'publish' AND pm.meta_key = '{$meta_key}' AND pm.meta_value LIKE '%{$q}%'";
-        $results = $wpdb->get_results($sql);
+        $sql = "SELECT DISTINCT pm.meta_value FROM `{$wpdb->prefix}posts` p INNER JOIN `{$wpdb->prefix}postmeta` pm ON p.ID = pm.post_id WHERE p.post_type = 'sendtrace' AND p.post_status = 'publish' AND pm.meta_key = %s AND pm.meta_value LIKE '%{$q}%'";
+        $results = $wpdb->get_results($wpdb->prepare($sql, $meta_key));
         if (!empty($results)) {
             $new_result = array();
             foreach ($results as $result) {
@@ -40,10 +40,10 @@ class WPSTAjax
         
         if (empty($shipmet_ids) || empty($post_status)) {
             if (empty($shipmet_ids)) {
-                $result['error'] = __('No shipment(s) selected.', 'wpst');
+                $result['error'] = __('No shipment(s) selected.', 'sendtrace-shipments');
             }
             if (empty($post_status)) {
-                $result['error'] = __('Status is not set for this action.', 'wpst');
+                $result['error'] = __('Status is not set for this action.', 'sendtrace-shipments');
             }
         } else {
             try {
@@ -145,18 +145,18 @@ class WPSTAjax
         $custom_fields = $WPSTField->fields();
 
         if (empty($posts)) {
-            $result['error'] = __('No record(s) found.', 'sendtrace');
+            $result['error'] = __('No record(s) found.', 'sendtrace-shipments');
         }
         if (empty($custom_fields)) {
-            $result['error'] = __('Custom fields is empty.', 'sendtrace');
+            $result['error'] = __('Custom fields is empty.', 'sendtrace-shipments');
         }
 
         $report_data = array();
         $report_headers = array(
-            'tracking_no' => __('Tracking No.', 'sendtrace'), 
-            'post_date' => __('Date Created', 'sendtrace'),
-            'sendtrace_status' => __('Status', 'sendtrace'),
-            'assigned_client' => __('Assigned Client', 'sendtrace')
+            'tracking_no' => __('Tracking No.', 'sendtrace-shipments'), 
+            'post_date' => __('Date Created', 'sendtrace-shipments'),
+            'sendtrace_status' => __('Status', 'sendtrace-shipments'),
+            'assigned_client' => __('Assigned Client', 'sendtrace-shipments')
         );        
 
         if (!empty($posts) && !empty($custom_fields)) {
@@ -180,7 +180,7 @@ class WPSTAjax
             
                 $report_data[$post->ID]['packages'] = wpst_get_packages_data($post->ID, true, true);
             }
-            $report_headers['packages'] = __('Pacakges', 'sendtrace');
+            $report_headers['packages'] = __('Pacakges', 'sendtrace-shipments');
         }
 
         $format = wpst_sanitize_data(apply_filters('wpst_report_file_format', 'csv'));

@@ -1945,6 +1945,7 @@
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2117,8 +2118,8 @@
 
 .sendtrace .form-check-input {
   /* position: absolute; */
-  /* margin-top: 0.3rem;
-  margin-left: -1.25rem; */
+  /* margin-left: -1.25rem; */
+  margin-top: 0.3rem;  
 }
 
 .sendtrace .form-check-input[disabled] ~ .form-check-label,
@@ -4707,6 +4708,7 @@
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  margin: 0;
 }
 
 .sendtrace .card > hr {
@@ -5894,7 +5896,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1050;
+  z-index: 1051;
   display: none;
   width: 100%;
   height: 100%;
@@ -10171,10 +10173,638 @@
 .sendtrace .invisible {
   visibility: hidden !important;
 }
+
 /* New rules */
 /*# sourceMappingURL=bootstrap.css.map */
+.sendtrace .form-check-input:before {
+	content: "";
+	position: absolute;
+	-webkit-box-shadow: 0 0 0 13px transparent;
+	box-shadow: 0 0 0 13px transparent;
+	border-radius: 50%;
+	width: .875rem;
+	height: .875rem;
+	background-color: transparent;
+	opacity: 0;
+	pointer-events: none;
+	-webkit-transform: scale(0);
+	transform: scale(0)
+}
+  
+.sendtrace .form-check-input:hover {
+  cursor: pointer
+}
+
+.sendtrace .form-check-input:hover:before {
+  opacity: .04;
+  -webkit-box-shadow: 0 0 0 13px rgba(0, 0, 0, .6);
+  box-shadow: 0 0 0 13px rgba(0, 0, 0, .6)
+}
+
+.sendtrace .form-check-input:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-color: #757575;
+  -webkit-transition: border-color .2s;
+  transition: border-color .2s
+}
+
+.sendtrace .form-check-input:focus:before {
+  opacity: .12;
+  -webkit-box-shadow: 0 0 0 13px rgba(0, 0, 0, .6);
+  box-shadow: 0 0 0 13px rgba(0, 0, 0, .6);
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: -webkit-box-shadow .2s, -webkit-transform .2s;
+  transition: -webkit-box-shadow .2s, -webkit-transform .2s;
+  transition: box-shadow .2s, transform .2s;
+  transition: box-shadow .2s, transform .2s, -webkit-box-shadow .2s, -webkit-transform .2s
+}
+
+.sendtrace .form-check-input:checked {
+  border-color: #1266f1
+}
+
+.sendtrace .form-check-input:checked:before {
+  opacity: .16
+}
+
+.sendtrace .form-check-input:checked:after {
+  content: "";
+  position: absolute
+}
+
+.sendtrace .form-check-input:checked:focus {
+  border-color: #1266f1
+}
+
+.sendtrace .form-check-input:checked:focus:before {
+  -webkit-box-shadow: 0 0 0 13px #1266f1;
+  box-shadow: 0 0 0 13px #1266f1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: -webkit-box-shadow .2s, -webkit-transform .2s;
+  transition: -webkit-box-shadow .2s, -webkit-transform .2s;
+  transition: box-shadow .2s, transform .2s;
+  transition: box-shadow .2s, transform .2s, -webkit-box-shadow .2s, -webkit-transform .2s
+}
+
+.sendtrace .form-check-input:indeterminate:focus:before {
+  -webkit-box-shadow: 0 0 0 13px #1266f1;
+  box-shadow: 0 0 0 13px #1266f1
+}
+
+.sendtrace .form-check-input[type=checkbox] {
+  border-radius: .125rem
+}
+
+.sendtrace .form-check-input[type=checkbox]:focus:after {
+  content: "";
+  position: absolute;
+  width: .875rem;
+  height: .875rem;
+  z-index: 1;
+  display: block;
+  border-radius: 0;
+  background-color: #fff
+}
+
+.sendtrace .form-check-input[type=checkbox]:checked {
+  background-image: none;
+  background-color: #1266f1
+}
+
+.sendtrace .form-check-input[type=checkbox]:checked:after {
+  display: block;
+  -webkit-transform: rotate(45deg)/*!rtl:ignore*/;
+  transform: rotate(45deg)/*!rtl:ignore*/;
+  width: .375rem;
+  height: .8125rem;
+  border: .125rem solid #fff;
+  border-top: 0;
+  border-left: 0/*!rtl:ignore*/;
+  margin-left: .25rem;
+  margin-top: -1px;
+  background-color: transparent
+}
+
+.sendtrace .form-check-input[type=checkbox]:checked:focus {
+  background-color: #1266f1
+}
+
+.sendtrace .form-check-input[type=checkbox]:indeterminate {
+  background-image: none;
+  background-color: transparent;
+  border-color: #757575
+}
+
+.sendtrace .form-check-input[type=checkbox]:indeterminate:after {
+  display: block;
+  -webkit-transform: rotate(90deg)/*!rtl:ignore*/;
+  transform: rotate(90deg)/*!rtl:ignore*/;
+  width: .125rem;
+  height: .875rem;
+  border: .125rem solid #fff;
+  border-top: 0;
+  border-left: 0/*!rtl:ignore*/;
+  margin-left: .375rem;
+  margin-top: 0
+}
+
+.sendtrace .form-check-input[type=checkbox]:indeterminate:focus {
+  background-color: #1266f1;
+  border-color: #1266f1
+}
+
+.sendtrace .form-check-input[type=radio] {
+  border-radius: 50%;
+  width: 1.25rem;
+  height: 1.25rem
+}
+
+.sendtrace .form-check-input[type=radio]:before {
+  width: 1rem;
+  height: 1rem
+}
+
+.sendtrace .form-check-input[type=radio]:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: 1;
+  display: block;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.sendtrace .form-check-input[type=radio]:checked {
+  background-image: none;
+  background-color: #fff
+}
+
+.sendtrace .form-check-input[type=radio]:checked:after {
+  border-radius: 50%;
+  width: .625rem;
+  height: .625rem;
+  border-color: #1266f1;
+  background-color: #1266f1;
+  margin-top: 0.3rem;
+  margin-left: 0.3rem;
+  -webkit-transition: border-color;
+  transition: border-color;
+}
+
+.sendtrace .form-check-input[type=radio]:checked:focus {
+  background-color: #fff
+}
+
+.sendtrace .form-check-label:hover {
+  cursor: pointer
+}
+
+.sendtrace .main-m-0 {
+	margin: 0 !important;
+  }
+  
+  .sendtrace .main-mt-0,
+  .sendtrace .main-my-0 {
+	margin-top: 0 !important;
+  }
+  
+  .sendtrace .main-mr-0,
+  .sendtrace .main-mx-0 {
+	margin-right: 0 !important;
+  }
+  
+  .sendtrace .main-mb-0,
+  .sendtrace .main-my-0 {
+	margin-bottom: 0 !important;
+  }
+  
+  .sendtrace .main-ml-0,
+  .sendtrace .main-mx-0 {
+	margin-left: 0 !important;
+  }
+  
+  .sendtrace .main-m-1 {
+	margin: 0.25rem !important;
+  }
+  
+  .sendtrace .main-mt-1,
+  .sendtrace .main-my-1 {
+	margin-top: 0.25rem !important;
+  }
+  
+  .sendtrace .main-mr-1,
+  .sendtrace .main-mx-1 {
+	margin-right: 0.25rem !important;
+  }
+  
+  .sendtrace .main-mb-1,
+  .sendtrace .main-my-1 {
+	margin-bottom: 0.25rem !important;
+  }
+  
+  .sendtrace .main-ml-1,
+  .sendtrace .main-mx-1 {
+	margin-left: 0.25rem !important;
+  }
+  
+  .sendtrace .main-m-2 {
+	margin: 0.5rem !important;
+  }
+  
+  .sendtrace .main-mt-2,
+  .sendtrace .main-my-2 {
+	margin-top: 0.5rem !important;
+  }
+  
+  .sendtrace .main-mr-2,
+  .sendtrace .main-mx-2 {
+	margin-right: 0.5rem !important;
+  }
+  
+  .sendtrace .main-mb-2,
+  .sendtrace .main-my-2 {
+	margin-bottom: 0.5rem !important;
+  }
+  
+  .sendtrace .main-ml-2,
+  .sendtrace .main-mx-2 {
+	margin-left: 0.5rem !important;
+  }
+  
+  .sendtrace .main-m-3 {
+	margin: 1rem !important;
+  }
+  
+  .sendtrace .main-mt-3,
+  .sendtrace .main-my-3 {
+	margin-top: 1rem !important;
+  }
+  
+  .sendtrace .main-mr-3,
+  .sendtrace .main-mx-3 {
+	margin-right: 1rem !important;
+  }
+  
+  .sendtrace .main-mb-3,
+  .sendtrace .main-my-3 {
+	margin-bottom: 1rem !important;
+  }
+  
+  .sendtrace .main-ml-3,
+  .sendtrace .main-mx-3 {
+	margin-left: 1rem !important;
+  }
+  
+  .sendtrace .main-m-4 {
+	margin: 1.5rem !important;
+  }
+  
+  .sendtrace .main-mt-4,
+  .sendtrace .main-my-4 {
+	margin-top: 1.5rem !important;
+  }
+  
+  .sendtrace .main-mr-4,
+  .sendtrace .main-mx-4 {
+	margin-right: 1.5rem !important;
+  }
+  
+  .sendtrace .main-mb-4,
+  .sendtrace .main-my-4 {
+	margin-bottom: 1.5rem !important;
+  }
+  
+  .sendtrace .main-ml-4,
+  .sendtrace .main-mx-4 {
+	margin-left: 1.5rem !important;
+  }
+  
+  .sendtrace .main-m-5 {
+	margin: 3rem !important;
+  }
+  
+  .sendtrace .main-mt-5,
+  .sendtrace .main-my-5 {
+	margin-top: 3rem !important;
+  }
+  
+  .sendtrace .main-mr-5,
+  .sendtrace .main-mx-5 {
+	margin-right: 3rem !important;
+  }
+  
+  .sendtrace .main-mb-5,
+  .sendtrace .main-my-5 {
+	margin-bottom: 3rem !important;
+  }
+  
+  .sendtrace .main-ml-5,
+  .sendtrace .main-mx-5 {
+	margin-left: 3rem !important;
+  }
+  
+  .sendtrace .main-p-0 {
+	padding: 0 !important;
+  }
+  
+  .sendtrace .main-pt-0,
+  .sendtrace .main-py-0 {
+	padding-top: 0 !important;
+  }
+  
+  .sendtrace .main-pr-0,
+  .sendtrace .main-px-0 {
+	padding-right: 0 !important;
+  }
+  
+  .sendtrace .main-pb-0,
+  .sendtrace .main-py-0 {
+	padding-bottom: 0 !important;
+  }
+  
+  .sendtrace .main-pl-0,
+  .sendtrace .main-px-0 {
+	padding-left: 0 !important;
+  }
+  
+  .sendtrace .main-p-1 {
+	padding: 0.25rem !important;
+  }
+  
+  .sendtrace .main-pt-1,
+  .sendtrace .main-py-1 {
+	padding-top: 0.25rem !important;
+  }
+  
+  .sendtrace .main-pr-1,
+  .sendtrace .main-px-1 {
+	padding-right: 0.25rem !important;
+  }
+  
+  .sendtrace .main-pb-1,
+  .sendtrace .main-py-1 {
+	padding-bottom: 0.25rem !important;
+  }
+  
+  .sendtrace .main-pl-1,
+  .sendtrace .main-px-1 {
+	padding-left: 0.25rem !important;
+  }
+  
+  .sendtrace .main-p-2 {
+	padding: 0.5rem !important;
+  }
+  
+  .sendtrace .main-pt-2,
+  .sendtrace .main-py-2 {
+	padding-top: 0.5rem !important;
+  }
+  
+  .sendtrace .main-pr-2,
+  .sendtrace .main-px-2 {
+	padding-right: 0.5rem !important;
+  }
+  
+  .sendtrace .main-pb-2,
+  .sendtrace .main-py-2 {
+	padding-bottom: 0.5rem !important;
+  }
+  
+  .sendtrace .main-pl-2,
+  .sendtrace .main-px-2 {
+	padding-left: 0.5rem !important;
+  }
+  
+  .sendtrace .main-p-3 {
+	padding: 1rem !important;
+  }
+  
+  .sendtrace .main-pt-3,
+  .sendtrace .main-py-3 {
+	padding-top: 1rem !important;
+  }
+  
+  .sendtrace .main-pr-3,
+  .sendtrace .main-px-3 {
+	padding-right: 1rem !important;
+  }
+  
+  .sendtrace .main-pb-3,
+  .sendtrace .main-py-3 {
+	padding-bottom: 1rem !important;
+  }
+  
+  .sendtrace .main-pl-3,
+  .sendtrace .main-px-3 {
+	padding-left: 1rem !important;
+  }
+  
+  .sendtrace .main-p-4 {
+	padding: 1.5rem !important;
+  }
+  
+  .sendtrace .main-pt-4,
+  .sendtrace .main-py-4 {
+	padding-top: 1.5rem !important;
+  }
+  
+  .sendtrace .main-pr-4,
+  .sendtrace .main-px-4 {
+	padding-right: 1.5rem !important;
+  }
+  
+  .sendtrace .main-pb-4,
+  .sendtrace .main-py-4 {
+	padding-bottom: 1.5rem !important;
+  }
+  
+  .sendtrace .main-pl-4,
+  .sendtrace .main-px-4 {
+	padding-left: 1.5rem !important;
+  }
+  
+  .sendtrace .main-p-5 {
+	padding: 3rem !important;
+  }
+  
+  .sendtrace .main-pt-5,
+  .sendtrace .main-py-5 {
+	padding-top: 3rem !important;
+  }
+  
+  .sendtrace .main-pr-5,
+  .sendtrace .main-px-5 {
+	padding-right: 3rem !important;
+  }
+  
+  .sendtrace .main-pb-5,
+  .sendtrace .main-py-5 {
+	padding-bottom: 3rem !important;
+  }
+  
+  .sendtrace .main-pl-5,
+  .sendtrace .main-px-5 {
+	padding-left: 3rem !important;
+  }
+  
+  .sendtrace .main-m-n1 {
+	margin: -0.25rem !important;
+  }
+  
+  .sendtrace .main-mt-n1,
+  .sendtrace .main-my-n1 {
+	margin-top: -0.25rem !important;
+  }
+  
+  .sendtrace .main-mr-n1,
+  .sendtrace .main-mx-n1 {
+	margin-right: -0.25rem !important;
+  }
+  
+  .sendtrace .main-mb-n1,
+  .sendtrace .main-my-n1 {
+	margin-bottom: -0.25rem !important;
+  }
+  
+  .sendtrace .main-ml-n1,
+  .sendtrace .main-mx-n1 {
+	margin-left: -0.25rem !important;
+  }
+  
+  .sendtrace .main-m-n2 {
+	margin: -0.5rem !important;
+  }
+  
+  .sendtrace .main-mt-n2,
+  .sendtrace .main-my-n2 {
+	margin-top: -0.5rem !important;
+  }
+  
+  .sendtrace .main-mr-n2,
+  .sendtrace .main-mx-n2 {
+	margin-right: -0.5rem !important;
+  }
+  
+  .sendtrace .main-mb-n2,
+  .sendtrace .main-my-n2 {
+	margin-bottom: -0.5rem !important;
+  }
+  
+  .sendtrace .main-ml-n2,
+  .sendtrace .main-mx-n2 {
+	margin-left: -0.5rem !important;
+  }
+  
+  .sendtrace .main-m-n3 {
+	margin: -1rem !important;
+  }
+  
+  .sendtrace .main-mt-n3,
+  .sendtrace .main-my-n3 {
+	margin-top: -1rem !important;
+  }
+  
+  .sendtrace .main-mr-n3,
+  .sendtrace .main-mx-n3 {
+	margin-right: -1rem !important;
+  }
+  
+  .sendtrace .main-mb-n3,
+  .sendtrace .main-my-n3 {
+	margin-bottom: -1rem !important;
+  }
+  
+  .sendtrace .main-ml-n3,
+  .sendtrace .main-mx-n3 {
+	margin-left: -1rem !important;
+  }
+  
+  .sendtrace .main-m-n4 {
+	margin: -1.5rem !important;
+  }
+  
+  .sendtrace .main-mt-n4,
+  .sendtrace .main-my-n4 {
+	margin-top: -1.5rem !important;
+  }
+  
+  .sendtrace .main-mr-n4,
+  .sendtrace .main-mx-n4 {
+	margin-right: -1.5rem !important;
+  }
+  
+  .sendtrace .main-mb-n4,
+  .sendtrace .main-my-n4 {
+	margin-bottom: -1.5rem !important;
+  }
+  
+  .sendtrace .main-ml-n4,
+  .sendtrace .main-mx-n4 {
+	margin-left: -1.5rem !important;
+  }
+  
+  .sendtrace .main-m-n5 {
+	margin: -3rem !important;
+  }
+  
+  .sendtrace .main-mt-n5,
+  .sendtrace .main-my-n5 {
+	margin-top: -3rem !important;
+  }
+  
+  .sendtrace .main-mr-n5,
+  .sendtrace .main-mx-n5 {
+	margin-right: -3rem !important;
+  }
+  
+  .sendtrace .main-mb-n5,
+  .sendtrace .main-my-n5 {
+	margin-bottom: -3rem !important;
+  }
+  
+  .sendtrace .main-ml-n5,
+  .sendtrace .main-mx-n5 {
+	margin-left: -3rem !important;
+  }
+  
+  .sendtrace .main-m-auto {
+	margin: auto !important;
+  }
+  
+  .sendtrace .main-mt-auto,
+  .sendtrace .main-my-auto {
+	margin-top: auto !important;
+  }
+  
+  .sendtrace .main-mr-auto,
+  .sendtrace .main-mx-auto {
+	margin-right: auto !important;
+  }
+  
+  .sendtrace .main-mb-auto,
+  .sendtrace .main-my-auto {
+	margin-bottom: auto !important;
+  }
+  
+  .sendtrace .main-ml-auto,
+  .sendtrace .main-mx-auto {
+	margin-left: auto !important;
+  }
 
 /* ================== Custom ================= */
+.sendtrace .main-form-control {
+  font-size: 1rem;
+}
+.sendtrace .fw-light{font-weight:300!important}
+.sendtrace .fw-lighter{font-weight:lighter!important}
+.sendtrace .fw-normal{font-weight:400!important}
+.sendtrace .fw-bold{font-weight:700!important}
+.sendtrace .fw-semibold{font-weight:600!important}
+.sendtrace .fw-bolder{font-weight:bolder!important}
 .sendtrace .custom-select.selectize {
   padding: 0;
 }
@@ -10227,4 +10857,12 @@
 .sendtrace .pagination .page-item.active .btn{
   background-color: var(--sendtrace-bg);
   color: var(--sendtrace-color) !important;
+}
+
+/* MDB */
+.sendtrace .g-2, .sendtrace .gy-2 {
+  --bs-gutter-y: 0.5rem;
+}
+.sendtrace .g-2, .sendtrace .gx-2 {
+  --bs-gutter-x: 0.5rem;
 }

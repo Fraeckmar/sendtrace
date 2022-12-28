@@ -1,0 +1,3 @@
+﻿"Tracking No.","Date Created",Status,"Assigned Client","Shipper Name","Phone Number",Email,Address,"Receiver Name","Phone Number",Email,Address,"Transportation Mode",Courier,Carrier,Origin,Destination,"Pickup Date","Pickup Time","Departure Time","Expected Delivery Date",Remarks,Pacakges
+SHIP21049726,2022-12-28,"Shipment Created","Jane Doe","Jane Doe",,,,"John Doe",,,,"Air Freight","Courier 1",,,,,,,,,"Qty=1 | Package Type=Carton | Weight=5 | Length=5 | Width=5 | Height=5 | Description=5 | Value=5"
+SHIP20614085,2022-12-24,"In Transit","Jane Doe","Jane Sender",,,,"John Receiver",,,,,,,,,,,,,,

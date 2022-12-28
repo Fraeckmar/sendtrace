@@ -15,7 +15,7 @@ echo "<div id='shipment-history' class='col-sm-12'>";
                                 echo "</th>";
                             }
                             if (wpst_can_modify_history()) {
-                                echo "<th>".__('Action', 'sendtrace')."</th>";
+                                echo "<th>".__('Action', 'sendtrace-shipments')."</th>";
                             }                            
                         echo "</tr>";
                     }

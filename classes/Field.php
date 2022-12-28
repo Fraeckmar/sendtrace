@@ -12,24 +12,24 @@ class WPSTField
                 'fields' => array(
                     'wpst_shipper_name' => array(
                         'key' => 'wpst_shipper_name',
-                        'label' => __('Shipper Name', 'sendtrace'),
+                        'label' => __('Shipper Name', 'sendtrace-shipments'),
                         'type' => 'text',
                         'required' => true
                     ),
                     'wpst_shipper_phone_number' => array(
                         'key' => 'wpst_shipper_phone_number',
-                        'label' => __('Phone Number', 'sendtrace'),
+                        'label' => __('Phone Number', 'sendtrace-shipments'),
                         'type' => 'number',
                         'extras' => 'step=any'
                     ),
                     'wpst_shipper_email' => array(
                         'key' => 'wpst_shipper_email',
-                        'label' => __('Email', 'sendtrace'),
+                        'label' => __('Email', 'sendtrace-shipments'),
                         'type' => 'email',
                     ),
                     'wpst_shipper_address' => array(
                         'key' => 'wpst_shipper_address',
-                        'label' => __('Address', 'sendtrace'),
+                        'label' => __('Address', 'sendtrace-shipments'),
                         'type' => 'address',
                     )
                 )
@@ -41,24 +41,24 @@ class WPSTField
                 'fields' => array(
                     'wpst_receiver_name' => array(
                         'key' => 'wpst_receiver_name',
-                        'label' => __('Receiver Name', 'sendtrace'),
+                        'label' => __('Receiver Name', 'sendtrace-shipments'),
                         'type' => 'text',
                         'required' => true
                     ),
                     'wpst_receiver_phone_number' => array(
                         'key' => 'wpst_receiver_phone_number',
-                        'label' => __('Phone Number', 'sendtrace'),
+                        'label' => __('Phone Number', 'sendtrace-shipments'),
                         'type' => 'number',
                         'extras' => 'step=any'
                     ),
                     'wpst_receiver_email' => array(
                         'key' => 'wpst_receiver_email',
-                        'label' => __('Email', 'sendtrace'),
+                        'label' => __('Email', 'sendtrace-shipments'),
                         'type' => 'email',
                     ),
                     'wpst_receiver_address' => array(
                         'key' => 'wpst_receiver_address',
-                        'label' => __('Address', 'sendtrace'),
+                        'label' => __('Address', 'sendtrace-shipments'),
                         'type' => 'address',
                     )
                 )
@@ -70,56 +70,56 @@ class WPSTField
                 'fields' => array(
                     'wpst_transporation_mode' => array(
                         'key' => 'wpst_transporation_mode',
-                        'label' => __('Transportation Mode', 'sendtrace'),
+                        'label' => __('Transportation Mode', 'sendtrace-shipments'),
                         'type' => 'select',
                         'options' => $sendtrace->shipment_types(),
                         'class' => 'w-100'
                     ),
                     'wpst_courier' => array(
                         'key' => 'wpst_courier',
-                        'label' => __('Courier', 'sendtrace'),
+                        'label' => __('Courier', 'sendtrace-shipments'),
                         'type' => 'text',
                     ),
                     'wpst_carrier' => array(
                         'key' => 'wpst_carrier',
-                        'label' => __('Carrier', 'sendtrace'),
+                        'label' => __('Carrier', 'sendtrace-shipments'),
                         'type' => 'select',
                         'options' => $sendtrace->carriers(),
                         'class' => 'w-100'
                     ),
                     'wpst_origin' => array(
                         'key' => 'wpst_origin',
-                        'label' => __('Origin', 'sendtrace'),
+                        'label' => __('Origin', 'sendtrace-shipments'),
                         'type' => 'text',
                     ),
                     'wpst_destination' => array(
                         'key' => 'wpst_destination',
-                        'label' => __('Destination', 'sendtrace'),
+                        'label' => __('Destination', 'sendtrace-shipments'),
                         'type' => 'text',
                     ),
                     'wpst_pickup_date' => array(
                         'key' => 'wpst_pickup_date',
-                        'label' => __('Pickup Date', 'sendtrace'),
+                        'label' => __('Pickup Date', 'sendtrace-shipments'),
                         'type' => 'date',
                     ),
                     'wpst_pickup_time' => array(
                         'key' => 'wpst_pickup_time',
-                        'label' => __('Pickup Time', 'sendtrace'),
+                        'label' => __('Pickup Time', 'sendtrace-shipments'),
                         'type' => 'time'
                     ),
                     'wpst_departure_time' => array(
                         'key' => 'wpst_departure_time',
-                        'label' => __('Departure Time', 'sendtrace'),
+                        'label' => __('Departure Time', 'sendtrace-shipments'),
                         'type' => 'time',
                     ),
                     'wpst_expected_delivery_date' => array(
                         'key' => 'wpst_expected_delivery_date',
-                        'label' => __('Expected Delivery Date', 'sendtrace'),
+                        'label' => __('Expected Delivery Date', 'sendtrace-shipments'),
                         'type' => 'date',
                     ),
                     'wpst_remarks' => array(
                         'key' => 'wpst_remarks',
-                        'label' => __('Remarks', 'sendtrace'),
+                        'label' => __('Remarks', 'sendtrace-shipments'),
                         'type' => 'textarea',
                         'class' => 'w-100'
                     ),
@@ -150,11 +150,11 @@ class WPSTField
         $fields = array(
             'general' => array(
                 array(
-                    'heading' => __('Appearance & Company Info', 'sendtrace'),
+                    'heading' => __('Appearance & Company Info', 'sendtrace-shipments'),
                     'fields' => array(
                         array(
                             'key' => 'company_logo',
-                            'label' => __('Compay Logo', 'sendtrace'),
+                            'label' => __('Compay Logo', 'sendtrace-shipments'),
                             'type' => 'upload',
                             'value' => $sendtrace->get_setting('general', 'company_logo'),
                             'setting' => 'general',
@@ -162,7 +162,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'bg_color',
-                            'label' => __('Background Color', 'sendtrace'),
+                            'label' => __('Background Color', 'sendtrace-shipments'),
                             'type' => 'color',
                             'class' => 'form-control-color',
                             'value' => wpst_bg_color(),
@@ -170,7 +170,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'fg_color',
-                            'label' => __('Foreground Color', 'sendtrace'),
+                            'label' => __('Foreground Color', 'sendtrace-shipments'),
                             'type' => 'color',
                             'class' => 'form-control-color',
                             'value' => wpst_fg_color(),
@@ -179,11 +179,11 @@ class WPSTField
                     )
                 ),
                 array(
-                    'heading' => __('Shipment', 'sendtrace'),
+                    'heading' => __('Shipment', 'sendtrace-shipments'),
                     'fields' => array(
                         array(
                             'key' => 'auto_generate',
-                            'label' => __('Auto Generate Tracking No.?', 'sendtrace'),
+                            'label' => __('Auto Generate Tracking No.?', 'sendtrace-shipments'),
                             'type' => 'radio',
                             'options' => array('Yes', 'No'),
                             'value' => $sendtrace->get_setting('general', 'auto_generate', 'Yes'),
@@ -191,7 +191,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'tracking_no_length',
-                            'label' => __('Tracking No. Length', 'sendtrace'),
+                            'label' => __('Tracking No. Length', 'sendtrace-shipments'),
                             'type' => 'number',
                             'value' => !empty($sendtrace->get_setting('general', 'tracking_no_length')) ? $sendtrace->get_setting('general', 'tracking_no_length') : 8,
                             'setting' => 'general',
@@ -199,21 +199,21 @@ class WPSTField
                         ),
                         array(
                             'key' => 'tracking_no_prefix',
-                            'label' => __('Tracking No. Prefix', 'sendtrace'),
+                            'label' => __('Tracking No. Prefix', 'sendtrace-shipments'),
                             'type' => 'text',
                             'value' => !empty($sendtrace->get_setting('general', 'tracking_no_prefix')) ? $sendtrace->get_setting('general', 'tracking_no_prefix') : 'SHIP',
                             'setting' => 'general'
                         ),
                         array(
                             'key' => 'tracking_no_suffix',
-                            'label' => __('Tracking No. Suffix', 'sendtrace'),
+                            'label' => __('Tracking No. Suffix', 'sendtrace-shipments'),
                             'type' => 'text',
                             'value' => $sendtrace->get_setting('general', 'tracking_no_suffix'),
                             'setting' => 'general'
                         ),
                         array(
                             'key' => 'status_list',
-                            'label' => __('Status Options', 'sendtrace'),
+                            'label' => __('Status Options', 'sendtrace-shipments'),
                             'type' => 'select',
                             'class' => 'selectize rounded border form-control selectize-set-min-height',
                             'options' => $sendtrace->status_list(),
@@ -223,7 +223,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'package_types',
-                            'label' => __('Package Types', 'sendtrace'),
+                            'label' => __('Package Types', 'sendtrace-shipments'),
                             'type' => 'select',
                             'class' => 'selectize rounded border form-control selectize-set-min-height',
                             'options' => $sendtrace->package_types(),
@@ -233,7 +233,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'transportation_mode',
-                            'label' => __('Transportation Mode', 'sendtrace'),
+                            'label' => __('Transportation Mode', 'sendtrace-shipments'),
                             'type' => 'select',
                             'class' => 'selectize rounded border form-control selectize-set-min-height',
                             'options' => $sendtrace->shipment_types(),
@@ -243,7 +243,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'carriers',
-                            'label' => __('Carrier Options', 'sendtrace'),
+                            'label' => __('Carrier Options', 'sendtrace-shipments'),
                             'type' => 'select',
                             'class' => 'selectize rounded border form-control selectize-set-min-height',
                             'options' => $sendtrace->carriers(),
@@ -253,7 +253,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'roles_modify_history',
-                            'label' => __('Roles can modify shipment history', 'sendtrace'),
+                            'label' => __('Roles can modify shipment history', 'sendtrace-shipments'),
                             'type' => 'checkbox',
                             'options' => wpst_get_user_roles(),
                             'value' => $sendtrace->get_setting('general', 'roles_modify_history'),
@@ -262,25 +262,25 @@ class WPSTField
                     )
                 ),
                 array(
-                    'heading' => __('Multiple Pacakge', 'sendtrace'),
+                    'heading' => __('Multiple Pacakge', 'sendtrace-shipments'),
                     'fields' => array(
                         array(
                             'key' => 'weight_unit',
-                            'label' => __('Weight Unit', 'sendtrace'),
+                            'label' => __('Weight Unit', 'sendtrace-shipments'),
                             'type' => 'text',
                             'value' => $sendtrace->weight_unit_used(),
                             'setting' => 'general'
                         ),
                         array(
                             'key' => 'dim_unit',
-                            'label' => __('Dimension Unit', 'sendtrace'),
+                            'label' => __('Dimension Unit', 'sendtrace-shipments'),
                             'type' => 'text',
                             'value' => $sendtrace->dim_unit_used(),
                             'setting' => 'general'
                         ),
                         array(
                             'key' => 'volumetric_weight_divisor',
-                            'label' => __('Volumetric Weight Dvisor', 'sendtrace'),
+                            'label' => __('Volumetric Weight Dvisor', 'sendtrace-shipments'),
                             'description' => '<strong>Note</strong>: Use to get volumetric weight: (L*W*H) / Divisor',
                             'type' => 'text',
                             'value' => $sendtrace->get_volumetric_weight_divisor(),
@@ -289,11 +289,11 @@ class WPSTField
                     )
                 ),
                 array(
-                    'heading' => __('Fees', 'sendtrace'),
+                    'heading' => __('Fees', 'sendtrace-shipments'),
                     'fields' => array(
                         array(
                             'key' => 'tax',
-                            'label' => __('Tax in (%)', 'sendtrace'),
+                            'label' => __('Tax in (%)', 'sendtrace-shipments'),
                             'description' => '<strong>Note</strong>: This will apply all payment transactions.',
                             'type' => 'number',
                             'value' => $sendtrace->get_setting('general', 'tax', 0),
@@ -305,11 +305,11 @@ class WPSTField
             ),
             'email_admin' => array(
                 array(
-                    'heading' => __('Admin Email Setting', 'sendtrace'),
+                    'heading' => __('Admin Email Setting', 'sendtrace-shipments'),
                     'fields' => array(
                         array(
                             'key' => 'admin_enable',
-                            'label' => __('Enable?', 'sendtrace'),
+                            'label' => __('Enable?', 'sendtrace-shipments'),
                             'type' => 'radio',
                             'required' => true,
                             'class' => '',
@@ -320,7 +320,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'admin_mail_to',
-                            'label' => __('Mail To', 'sendtrace'),
+                            'label' => __('Mail To', 'sendtrace-shipments'),
                             'type' => 'select',
                             'required' => true,
                             'class' => 'selectize',
@@ -333,7 +333,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'admin_cc',
-                            'label' => __('Cc', 'sendtrace'),
+                            'label' => __('Cc', 'sendtrace-shipments'),
                             'type' => 'select',
                             'required' => false,
                             'class' => 'selectize',
@@ -346,7 +346,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'admin_bcc',
-                            'label' => __('Bcc', 'sendtrace'),
+                            'label' => __('Bcc', 'sendtrace-shipments'),
                             'type' => 'select',
                             'required' => false,
                             'class' => 'selectize',
@@ -359,7 +359,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'admin_subject',
-                            'label' => __('Subject', 'sendtrace'),
+                            'label' => __('Subject', 'sendtrace-shipments'),
                             'type' => 'text',
                             'required' => true,
                             'class' => 'form-control',
@@ -369,7 +369,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'admin_body',
-                            'label' => __('Body', 'sendtrace'),
+                            'label' => __('Body', 'sendtrace-shipments'),
                             'type' => 'textarea',
                             'required' => true,
                             'class' => 'form-control',
@@ -381,7 +381,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'admin_footer',
-                            'label' => __('Footer', 'sendtrace'),
+                            'label' => __('Footer', 'sendtrace-shipments'),
                             'type' => 'textarea',
                             'required' => true,
                             'class' => 'form-control',
@@ -396,11 +396,11 @@ class WPSTField
             ),
             'email_client' => array(
                 array(
-                    'heading' => esc_html__('Client Email Setting', 'sendtrace'),
+                    'heading' => esc_html__('Client Email Setting', 'sendtrace-shipments'),
                     'fields' => array(
                         array(
                             'key' => 'client_enable',
-                            'label' => __('Enable?', 'sendtrace'),
+                            'label' => __('Enable?', 'sendtrace-shipments'),
                             'type' => 'radio',
                             'required' => true,
                             'class' => '',
@@ -420,7 +420,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'client_mail_to',
-                            'label' => __('Mail To', 'sendtrace'),
+                            'label' => __('Mail To', 'sendtrace-shipments'),
                             'type' => 'select',
                             'required' => true,
                             'class' => 'selectize',
@@ -433,7 +433,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'client_cc',
-                            'label' => __('Cc', 'sendtrace'),
+                            'label' => __('Cc', 'sendtrace-shipments'),
                             'type' => 'select',
                             'required' => false,
                             'class' => 'selectize',
@@ -446,7 +446,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'client_bcc',
-                            'label' => __('Bcc', 'sendtrace'),
+                            'label' => __('Bcc', 'sendtrace-shipments'),
                             'type' => 'select',
                             'required' => false,
                             'class' => 'selectize',
@@ -459,7 +459,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'client_subject',
-                            'label' => __('Subject', 'sendtrace'),
+                            'label' => __('Subject', 'sendtrace-shipments'),
                             'type' => 'text',
                             'required' => true,
                             'class' => 'form-control',
@@ -469,7 +469,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'client_body',
-                            'label' => __('Body', 'sendtrace'),
+                            'label' => __('Body', 'sendtrace-shipments'),
                             'type' => 'textarea',
                             'required' => true,
                             'class' => 'form-control',
@@ -481,7 +481,7 @@ class WPSTField
                         ),
                         array(
                             'key' => 'client_footer',
-                            'label' => __('Footer', 'sendtrace'),
+                            'label' => __('Footer', 'sendtrace-shipments'),
                             'type' => 'textarea',
                             'required' => true,
                             'class' => 'form-control',
@@ -503,7 +503,7 @@ class WPSTField
         $fields = array(
             'qty' => array(
                 'key' => 'qty',
-                'label' => __('Qty', 'sendtrace'),
+                'label' => __('Qty', 'sendtrace-shipments'),
                 'type' => 'number',
                 'class' => 'qty',
                 'unit' => 'pcs',
@@ -511,7 +511,7 @@ class WPSTField
             ),
             'package_type' => array(
                 'key' => 'package_type',
-                'label' => __('Package Type', 'sendtrace'),
+                'label' => __('Package Type', 'sendtrace-shipments'),
                 'type' => 'select',
                 'options' => $sendtrace->package_types(),
                 'field_col' => '',
@@ -520,7 +520,7 @@ class WPSTField
             ),
             'weight' => array(
                 'key' => 'weight',
-                'label' => __('Weight', 'sendtrace'),
+                'label' => __('Weight', 'sendtrace-shipments'),
                 'type' => 'number',
                 'extras' => 'step=any min=0',
                 'class' => 'weight',
@@ -529,7 +529,7 @@ class WPSTField
             ),
             'length' => array(
                 'key' => 'length',
-                'label' => __('Length', 'sendtrace'),
+                'label' => __('Length', 'sendtrace-shipments'),
                 'type' => 'number',
                 'extras' => 'step=any min=0',
                 'class' => 'length',
@@ -538,7 +538,7 @@ class WPSTField
             ),
             'width' => array(
                 'key' => 'width',
-                'label' => __('Width', 'sendtrace'),
+                'label' => __('Width', 'sendtrace-shipments'),
                 'type' => 'number',
                 'extras' => 'step=any min=0',
                 'class' => 'width',
@@ -547,7 +547,7 @@ class WPSTField
             ),
             'height' => array(
                 'key' => 'height',
-                'label' => __('Height', 'sendtrace'),
+                'label' => __('Height', 'sendtrace-shipments'),
                 'type' => 'number',
                 'extras' => 'step=any min=0',
                 'class' => 'height',
@@ -573,7 +573,7 @@ class WPSTField
 
     function history_fields($shipment_id=0, $side_bar=false) {
         global $sendtrace;
-        $status_label = $side_bar ? __('New Status', 'sendtrace') : __('Status', 'sendtrace');
+        $status_label = $side_bar ? __('New Status', 'sendtrace-shipments') : __('Status', 'sendtrace-shipments');
         $fields = array(
             'sendtrace_status' => array(
                 'key' => 'sendtrace_status',
@@ -584,21 +584,21 @@ class WPSTField
             ),
             'sendtrace_datetime' => array(
                 'key' => 'sendtrace_datetime',
-                'label' => __('Date Time', 'sendtrace'),
+                'label' => __('Date Time', 'sendtrace-shipments'),
                 'type' => 'text',
                 'class' => 'wpst-datetimepicker',
                 'value' => '',
             ),
             'remarks' => array(
                 'key' => 'remarks',
-                'label' => __('Remarks', 'sendtrace'),
+                'label' => __('Remarks', 'sendtrace-shipments'),
                 'type' => 'textarea',
                 'value' => '',
                 'extras' => 'rows=auto'
             ),
             'updated_by' => array(
                 'key' => 'updated_by',
-                'label' => __('Updated By', 'sendtrace'),
+                'label' => __('Updated By', 'sendtrace-shipments'),
                 'type' => 'text',
                 'value' => '',
                 'extras' => 'readonly'

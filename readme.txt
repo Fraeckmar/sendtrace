@@ -4,7 +4,7 @@ Contributors: SendTrace
 Tags: shipment tracking, order tracking, status tracking, freight forwarding, freight forwarder, transportation management, delivery tracking, tracking system, package tracking, courier tracking, order management system, order tracking system, status tracking system
 Tested up to: 6.1.1
 Requires PHP: 5.0 or newer
-Stable tag: 3.0.1
+Stable tag: 1.0.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

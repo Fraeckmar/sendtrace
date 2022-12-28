@@ -1,10 +1,10 @@
 <div id="manage-shipments" class="wrap sendtrace advanced-table">
-    <h2><?php esc_html_e('Manage Shipments', 'sendtrace'); ?> <a class="btn btn-sm btn-info" href="<?php echo esc_url(admin_url("admin.php?page={$plugin_slug}-item&action=new")) ?>"><?php esc_html_e('Add New', 'sendtrace'); ?></a></h2>
+    <h2><?php esc_html_e('Manage Shipments', 'sendtrace-shipments'); ?> <a class="btn btn-sm btn-light" href="<?php echo esc_url(admin_url("admin.php?page={$plugin_slug}-item&action=new")) ?>"><?php esc_html_e('Add New', 'sendtrace-shipments'); ?></a></h2>
     <div id="wpst-status-nav" class="row">
         <ul class="subsubsub col-sm-12">
-            <li class="active"><a class="<?php echo $is_active_shipments ? 'current' : '' ?>" href="<?php echo esc_url(admin_url("admin.php?page={$plugin_slug}")) ?>"><?php esc_html_e('Active', 'sendtrace') ?> <span class="count">(<?php echo esc_html($active_count) ?>)</span></a></li>
+            <li class="active"><a class="<?php echo $is_active_shipments ? 'current' : '' ?>" href="<?php echo esc_url(admin_url("admin.php?page={$plugin_slug}")) ?>"><?php esc_html_e('Active', 'sendtrace-shipments') ?> <span class="count">(<?php echo esc_html($active_count) ?>)</span></a></li>
             <?php if ($user_can_delete) : ?>
-                | <li class="trash"><a class="<?php echo $is_active_shipments ? '' : 'current' ?>" href="<?php echo esc_url(admin_url("admin.php?page={$plugin_slug}&status=trash")) ?>"><?php esc_html_e('Trash', 'sendtrace') ?> <span class="count">(<?php echo esc_html($trash_count) ?>)</span></a></li>
+                | <li class="trash"><a class="<?php echo $is_active_shipments ? '' : 'current' ?>" href="<?php echo esc_url(admin_url("admin.php?page={$plugin_slug}&status=trash")) ?>"><?php esc_html_e('Trash', 'sendtrace-shipments') ?> <span class="count">(<?php echo esc_html($trash_count) ?>)</span></a></li>
             <?php endif; ?>
         </ul>
     </div>
@@ -22,7 +22,7 @@
                 <?php do_action('table_nav_top'); ?>
             </div>
         </div>
-        <div class="col-md-3 col-sm-12">
+        <div id="show-entries" class="col-md-3 col-sm-12">
             <form method="GET">
                 <?php 
                 WPSTForm::draw_hidden('page', $plugin_slug);
@@ -57,7 +57,7 @@
                     } 
                     ?>
                     <?php do_action('wpst_shipment_list_after_head_column'); ?>
-                    <th width="80px" class="p-1 px-2"><?php _e('Print', 'sendtrace'); ?></th>
+                    <th width="80px" class="p-1 px-2"><?php _e('Print', 'sendtrace-shipments'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -88,14 +88,14 @@
                                         echo "<div class='row-actions'>";
                                             if($is_active_shipments) {
                                                 if ($user_can_update) {
-                                                    echo "<span class='edit'><a href='" .esc_url($update_url). "' data-id='".esc_html($shipment_id)."'>".esc_html__('Edit', 'wpcb_calendar')."</a></span>";
+                                                    echo "<span class='edit'><a href='" .esc_url($update_url). "' data-id='".esc_html($shipment_id)."'>".__('Edit', 'wpcb_calendar')."</a></span>";
                                                 }
                                                 if ($user_can_delete) {
-                                                    echo " | <span class='trash'><a class='update-single-shipment' href='" .esc_url($trash_url). "' data-id='".esc_html($shipment_id)."' data-status='trash'>" .esc_html__('Trash', 'wpcb_calendar'). "</a> </span>";
+                                                    echo " | <span class='trash'><a class='update-single-shipment' href='" .esc_url($trash_url). "' data-id='".esc_html($shipment_id)."' data-status='trash'>" .__('Trash', 'wpcb_calendar'). "</a> </span>";
                                                 }
                                             } else {
-                                                echo "<span class='untrash'><a class='update-single-shipment' href='" .esc_url($restore_url). "' data-id='".esc_html($shipment_id)."' data-status='publish'>" .esc_html__('Restore', 'wpcb_calendar'). "</a> | </span>";
-                                                echo "<span class='trash'><a class='update-single-shipment' href='" .esc_url($delete_url). "' data-id='".esc_html($shipment_id)."' data-status='delete'>" .esc_html__('Delete Permanently', 'wpcb_calendar'). "</a> </span>";
+                                                echo "<span class='untrash'><a class='update-single-shipment' href='" .esc_url($restore_url). "' data-id='".esc_html($shipment_id)."' data-status='publish'>" .__('Restore', 'wpcb_calendar'). "</a> | </span>";
+                                                echo "<span class='trash'><a class='update-single-shipment' href='" .esc_url($delete_url). "' data-id='".esc_html($shipment_id)."' data-status='delete'>" .__('Delete Permanently', 'wpcb_calendar'). "</a> </span>";
                                             }
                                         echo "</div>";
                                         echo "</a>";
@@ -124,7 +124,7 @@
                     <?php endwhile; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="5" class="p-1 px-2"><?php esc_html_e('No Shipment Found!', 'sendtrace'); ?></td>
+                        <td colspan="5" class="p-1 px-2"><?php _e('No Shipment Found!', 'sendtrace-shipments'); ?></td>
                     </tr>
                 <?php endif; ?>
             </tbody>
@@ -139,11 +139,11 @@
         <?php echo WPSTForm::gen_button('', $bulk_update_label, 'button', 'bulk-update-post-status btn btn-sm btn-danger', $status_attr); ?>
         <?php do_action('wpst_after_shipments_bulk_options'); ?>
     </div>
-    <div class="calendar-pagination row m-0">
+    <div class="sendtrace-pagination row m-0">
         <div class="col-md-3 p-0 pt-3 text-center">
             <?php
                 printf(
-                    '<p class="note note-primary m-0">Showing %s to %s of %s entries.</p>',
+                    '<p class="note note-primary m-0 shadow-sm">Showing %s to %s of %s entries.</p>',
                     $record_start,
                     $record_end,
                     number_format($number_records)

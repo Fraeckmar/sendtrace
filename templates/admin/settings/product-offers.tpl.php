@@ -8,7 +8,7 @@
 		</span>
 		<div class="collapse" id="advanceDashboardAddon">
 			<div class="card card-body m-0 mt-1">
-				Provides advanced dashboard for your site and allow your client(s) to have their own dashboard. Using shortcode [wpshipment_dashboard].
+				Provides advanced dashboard for your site and allow your client(s) to have their own dashboard. Using shortcode [sendtrace_dashboard].
 			</div>
 		</div>
 
@@ -18,7 +18,7 @@
 		</span>
 		<div class="collapse" id="customFieldAddon">
 			<div class="card card-body m-0 mt-1">
-				Make your form more powerful. Manage and customize fields for your Shiptrack.
+				Make your form more powerful. Manage and customize fields for your SendTrace.
 			</div>
 		</div>
 
@@ -46,7 +46,7 @@
 		<div class="card card-body mt-4">
 			<h4 class="h4 fw-bold">Contacts</h4>
 			<p><span class="fw-semibold">Email</span>: <a href="mailto:wpshiptrack@gmail.com">wpshiptrack@gmail.com</a></p>
-			<p><span class="fw-semibold">Skype</span>: <a href="https://join.skype.com/invite/tYDnAXyImDdT" target="_blank">Shiptrack</a></p>
+			<p><span class="fw-semibold">Skype</span>: <a href="https://join.skype.com/invite/tYDnAXyImDdT" target="_blank">SendTrace</a></p>
 		</div>
 	</div>
 </div>

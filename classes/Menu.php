@@ -52,8 +52,8 @@ class WPSTMenu
         // Report
         add_submenu_page(
             wpst_plugin_slug(),
-            __('Reports', 'sendtrace'),
-            __('Reports', 'sendtrace'),
+            __('Reports', 'sendtrace-shipments'),
+            __('Reports', 'sendtrace-shipments'),
             'manage_options',
             wpst_plugin_slug().'-report',
             array($this, 'wpst_sendtrace_reports')
@@ -119,12 +119,14 @@ class WPSTMenu
             );
         }
 
-        if (!$user_is_admin && (!wpst_editor_can_acess_all_shipments() && $current_user_role == 'sendtrace_editor')) {
-            $meta_query[] = array(
-                'key' => 'assigned_'.$assigned_role,
-                'value' => get_current_user_id(),
-                'compare' => '='
-            );
+        if (!$user_is_admin) {
+            if ($current_user_role != 'sendtrace_editor' || ($current_user_role == 'sendtrace_editor' && !wpst_editor_can_acess_all_shipments())) {
+                $meta_query[] = array(
+                    'key' => 'assigned_'.$assigned_role,
+                    'value' => get_current_user_id(),
+                    'compare' => '='
+                );
+            }            
         }
         
         $meta_query = apply_filters( 'wpst_manage_shipments_meta_query', $meta_query);

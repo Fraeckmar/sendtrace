@@ -17,6 +17,22 @@
     background-color: #ffff;
     color: red;
 }
+.selectize-search.selectize-control {
+    line-height: unset;
+}
+
+.selectize-search .selectize-input>* {
+    vertical-align: middle;
+}
+.selectize-search .selectize-dropdown-content .title{
+    padding: 5px;
+}
+.sendtrace .custom-select.selectize-search {
+    padding: 0;
+}
+.selectize-search .selectize-dropdown-content > div {
+    padding: 3px 0;
+}
 @media screen and (max-width: 480px) {
     #filter-wrap .selectize-control .selectize-input {
         padding: 0.65rem;

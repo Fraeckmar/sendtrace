@@ -17,7 +17,7 @@ if (!empty($shipment_data)) {
                     if (is_array($value)) {
                         $value = implode(', ', array_filter($value));
                     }
-                    echo "<p class='mb-1'><strong>".esc_html($data['label'])."</strong>: ".esc_html($value)."</p>";
+                    echo "<p class='mb-1'><span class='fw-semibold'>".esc_html($data['label'])."</span>: ".esc_html($value)."</p>";
                 }
             }
         echo "</div>";

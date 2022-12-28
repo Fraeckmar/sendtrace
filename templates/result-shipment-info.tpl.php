@@ -10,7 +10,7 @@ if (!empty($shipment_data['fields'])) {
                 if (is_array($data['value'])) {
                     $data['value'] = implode(', ', $data['value']);
                 }
-                echo "<p class='mb-1 col-md-6 col-sm-12'><strong>".esc_html($data['label'])."</strong>: ".esc_html($data['value'])."</p>";
+                echo "<p class='mb-1 col-md-6 col-sm-12'><span class='fw-semibold'>".esc_html($data['label'])."</span>: ".esc_html($data['value'])."</p>";
             }
         echo "</div>";
     echo "</div>";

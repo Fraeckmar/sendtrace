@@ -6,11 +6,11 @@ echo "<div class='wpst-sub-container'>";
             echo "<div class='btn-group btn-group-toggle sub-menus' data-toggle='buttons'>";
                 // Admin
                 echo "<label class='btn btn-sm btn-light m-0 mr-2 ".($sub_tab == 'admin' || $current_tab != $menu_key ? 'active' : '')."'>";
-                    echo "<input type='radio' name='options' id='option1' class='options' data-tab='admin' data-tab_container='#admin-email-container'/> ".__('Admin', 'sendtrace');
+                    echo "<input type='radio' name='options' id='option1' class='options' data-tab='admin' data-tab_container='#admin-email-container'/> ".__('Admin', 'sendtrace-shipments');
                 echo "</label>";
                 // Client
                 echo "<label class='btn btn-sm btn-light m-0 ".($sub_tab == 'client' ? 'active' : '')."'>";
-                    echo "<input type='radio' name='options' id='option2' class='options' data-tab='client' data-tab_container='#client-email-container'/> ".__('Client', 'sendtrace');
+                    echo "<input type='radio' name='options' id='option2' class='options' data-tab='client' data-tab_container='#client-email-container'/> ".__('Client', 'sendtrace-shipments');
                 echo "</label>";
             echo "</div>";
         echo "</div>";

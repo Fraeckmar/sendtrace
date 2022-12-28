@@ -4,7 +4,7 @@ class WPSTLoad
 {
 	static function wpst_load_textdomain()
 	{
-		load_plugin_textdomain('sendtrace', false, '/sendtrace/languages');
+		load_plugin_textdomain('sendtrace-shipments', false, '/sendtrace/languages');
 	}
 
 	static function wpst_create_default_page()

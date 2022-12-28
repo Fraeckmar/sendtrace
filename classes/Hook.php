@@ -31,10 +31,11 @@ class WPSTHook
 
     function wpst_save_shipment_history($shipment_id, $data, $old_status)
     {
-        if (!$shipment_id) {
+        global $WPSTField;
+        $action = isset($data['action']) ? wpst_sanitize_data($data['action']) : 'new';
+        if (!$shipment_id || empty($action)) {
             return false;
         }
-        global $WPSTField;
 
         $history = isset($data['shipment-history']) ? wpst_sanitize_data($data['shipment-history']) : array();
         $new_history = [];
@@ -47,8 +48,15 @@ class WPSTHook
         }
 
         $new_history = array_filter($new_history);
+        if (empty($new_history) && $action == 'new') {
+            $new_history = array(
+                'sendtrace_status' => wpst_get_default_status(),
+                'remarks' => ''
+            );
+        }
+        
         if (!empty($new_history)) {
-            $new_history['updated_by'] = get_current_user_id();
+            $new_history['updated_by'] = is_user_logged_in() ? get_current_user_id() : 0;
             $new_history['sendtrace_datetime'] = date(wpst_datetime_format());
             array_unshift($history, $new_history);
         }
@@ -57,7 +65,8 @@ class WPSTHook
 
     function wpst_send_admin_email_notification($shipment_id, $data, $old_status)
     {
-        if (!$shipment_id || get_post_status($shipment_id) != 'publish' || wpst_is_post_modified($shipment_id)) {
+        $force_send = array_key_exists('force_notification_send', $data) ? wpst_sanitize_data($data['force_notification_send']) : false;
+        if (!$force_send && (!$shipment_id || get_post_status($shipment_id) != 'publish' || wpst_is_post_modified($shipment_id))) {
             return false;
         }
         global $sendtrace;
@@ -98,9 +107,9 @@ class WPSTHook
         $footer = array_key_exists('admin_footer', $mail_setting) ? $mail_setting['admin_footer'] : wpst_get_default_admin_mail_footer();
         $mail_content = wpst_prepare_html_shortcodes($shipment_id, wpst_construct_mail_body($body, $footer, true));
 
-        $headers = array();
+        $headers = array('Content-Type: text/html; charset=UTF-8');
+        $headers[] = "From: " .get_bloginfo('name'). " <".$site_mail.">\r\n";
         $attachments = apply_filters('wpst_admin_mail_attachments', array(), $shipment_id);
-        $headers[] = esc_html('From: ' .get_bloginfo('name'). ' <'.$site_mail.'>');
 
         if(!empty($cc)){
             $headers[] = "cc: {$cc}";
@@ -129,7 +138,9 @@ class WPSTHook
         $sendtrace_status = sanitize_text_field(get_post_meta($shipment_id, 'sendtrace_status', true));
         $mail_setting = $sendtrace->get_setting_html('email_client');
         $is_enabled = strtoupper($mail_setting['client_enable'] ?? 'YES') == 'YES';
-        if (!$is_enabled || $sendtrace_status == $old_status || !in_array($sendtrace_status, wpst_send_client_email_in_status_list())) {
+        
+        $force_send = array_key_exists('force_notification_send', $data) ? wpst_sanitize_data($data['force_notification_send']) : false;
+        if (!$is_enabled || (!$force_send && ($sendtrace_status == $old_status || !in_array($sendtrace_status, wpst_send_client_email_in_status_list())))) {
             return false;
         }
 
@@ -158,15 +169,15 @@ class WPSTHook
         $footer = array_key_exists('client_footer', $mail_setting) ? $mail_setting['client_footer'] : wpst_get_default_client_mail_footer();
         $mail_content = wpst_prepare_html_shortcodes($shipment_id, wpst_construct_mail_body($body, $footer));
 
-        $headers = array();
+        $headers = array('Content-Type: text/html; charset=UTF-8');
+        $headers[] = "From: " .get_bloginfo('name'). " <".$site_mail.">\r\n";
         $attachments = apply_filters('wpst_client_mail_attachments', array(), $shipment_id);
-        $headers[] = esc_html('From: ' .get_bloginfo('name'). ' <'.$site_mail.'>');
 
         if(!empty($cc)){
-            $headers[] = "cc: {$cc}";
+            $headers[] = "cc: {$cc}\r\n";
         }
         if(!empty($bcc)){
-            $headers[] = "Bcc: {$bcc}";
+            $headers[] = "Bcc: {$bcc}\r\n";
         }
 
         if (!empty($mail_to)) {
@@ -183,13 +194,13 @@ class WPSTHook
         }
         $clients = wpst_get_users_list(array('sendtrace_client'));
         $assigned_client = $shipment_id ? get_post_meta($shipment_id, 'assigned_client', true) : '';
-        echo "<div class='card p-0 mb-3'>";
-            echo "<h5 class='h4 m-0 card-header'>".__('Assignment', 'sendtrace')."</h5>";
+        echo "<div class='card p-0 my-3'>";
+            echo "<h5 class='h5 m-0 card-header'>".__('Assignment', 'sendtrace-shipments')."</h5>";
             echo "<div class='card-body'>";
                 WPSTForm::gen_field(array(
                     'key' => 'assigned_client',
                     'type' => 'select',
-                    'label' => __('Client', 'sendtrace'),
+                    'label' => __('Client', 'sendtrace-shipments'),
                     'class' => 'selectize w-100',
                     'options' => $clients,
                     'description' => !empty($clients) ? '' : '<span class="text-danger">'.esc_html__('Create sendtrace client user.', 'wpst').'<a href="user-new.php" target="_blank"> '.esc_html('here', 'wpst').' <i class="fa fa-external-link"></i></a></span>',
@@ -211,7 +222,7 @@ class WPSTHook
         WPSTForm::gen_field(array(
             'key' => 'assigned_agent',
             'type' => 'select',
-            'label' => __('Agent', 'sendtrace'),
+            'label' => __('Agent', 'sendtrace-shipments'),
             'class' => 'selectize w-100',
             'options' => $agents,
             'description' => !empty($agents) ? '' : '<span class="text-danger">'.esc_html__('Create sendtrace agent user.', 'wpst').'<a href="user-new.php" target="_blank"> '.esc_html('here', 'wpst').' <i class="fa fa-external-link"></i></a></span>',
@@ -230,7 +241,7 @@ class WPSTHook
         WPSTForm::gen_field(array(
             'key' => 'assigned_editor',
             'type' => 'select',
-            'label' => __('Editor', 'sendtrace'),
+            'label' => __('Editor', 'sendtrace-shipments'),
             'class' => 'selectize w-100',
             'options' => $editors,
             'description' => !empty($editors) ? '' : '<span class="text-danger">'.esc_html__('Create Shiptrack Editor user.', 'wpst').'<a href="user-new.php" target="_blank"> '.esc_html('here', 'wpst').' <i class="fa fa-external-link"></i></a></span>',

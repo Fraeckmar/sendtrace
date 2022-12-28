@@ -42,7 +42,7 @@ class WPSTForm
         global $sendtrace, $WPSTCountry;
 
         if (empty($field)) { return false; }
-        $label = array_key_exists('label', $field) ? wp_kses_data($field['label']) : '';
+        $label = array_key_exists('label', $field) ? wp_kses($field['label'], wpst_allowed_html_tags()) : '';
         $type = array_key_exists('type', $field) ? sanitize_key($field['type']) : '';
         $key = array_key_exists('key', $field) ? sanitize_key($field['key']) : '';
         if ($allow_html && in_array($type, array('text', 'textarea'))) {
@@ -77,15 +77,15 @@ class WPSTForm
             if (!in_array($type, ['checkbox', 'radio'])) {
                 $html_field .= '<div class="form-group '.esc_html($group_class).'">';
                 if (!empty($label)) {
-                    $html_field .= '<label for="'.esc_html($key).'" class="form-label d-block '.$label_class.'">'.wp_kses_data($label).'</label>';
+                    $html_field .= '<label for="'.esc_html($key).'" class="form-label d-block '.esc_html($label_class).'">'.wp_kses($label, wpst_allowed_html_tags()).'</label>';
                 }  
                 if ($description) {
-                    $html_field .= '<p class="description small text-secondary mb-1">'.$description.'</p>';
+                    $html_field .= '<p class="description small text-secondary mb-1">'.wp_kses($description, wpst_allowed_html_tags()).'</p>';
                 }
             }            
         } else {
             if ($description) {
-                $html_field .= '<p class="description small text-secondary mb-1">'.$description.'</p>';
+                $html_field .= '<p class="description small text-secondary mb-1">'.wp_kses($description, wpst_allowed_html_tags()).'</p>';
             }
         }
 
@@ -93,7 +93,7 @@ class WPSTForm
             case 'upload':
                 $file_type = array_key_exists('file_type', $field) ? wpst_sanitize_data($field['file_type']) : 'image';
                 $html_field .= '<div class="file-upload-container">';
-                    $html_field .= self::draw_hidden($field_name, $value, "{$key}-field");
+                    $html_field .= self::draw_hidden($field_name, $value, $field_name, "{$key}-field");
                     $html_field .= "<span class='remove-file ".($value ? 'd-block' : 'd-none')."'>&times;</span>";
                     $html_field .= "<span id='".esc_html($key)."_thumbnail' class='file-placeholder ".($value ? 'd-block' : 'd-none')." my-1'><img width='90px' class='file-placeholder-img' src='" .esc_url(wp_get_attachment_url($value)). "' /></span>";                  
                     $html_field .= "<span class='btn btn-sm btn-primary m-0 mb-3 wpst-media-uploader' data-btn_txt='Use this media' data-thumbnail='#".esc_html($key)."_thumbnail' data-file_type='".esc_html($file_type)."' data-key='.".esc_html($key)."-field'><i class='fa fa-upload'></i> Upload</span>";
@@ -195,10 +195,11 @@ class WPSTForm
         echo $html_field;
     }
 
-    public static function draw_hidden($name, $value='', $class='', $has_name=true)
+    public static function draw_hidden($name, $value='', $id='', $class='', $has_name=true)
     {
         $name_attr = $has_name ? "name={$name}" : "";
-        echo "<input type=hidden id='".esc_html($name)."' ".esc_html($name_attr)." value='".esc_html($value)."' class='".esc_html($class)."'>";
+        $id = !empty($id) ? $id : $name;
+        echo "<input type=hidden id='".esc_html($id)."' ".esc_html($name_attr)." value='".esc_html($value)."' class='".esc_html($class)."'>";
     }
 
     public static function draw_search_field($meta_key, $value, $label='', $class='', $placeholder='', $extras='', $form_group=false)
@@ -215,7 +216,7 @@ class WPSTForm
             'placeholder' => $placeholder,
             'group_class' => 'm-0'
         ];
-        self::draw_hidden("{$meta_key}_options", base64_encode(json_encode($options)), '', false);
+        self::draw_hidden("{$meta_key}_options", base64_encode(json_encode($options)), '', '', false);
         echo self::gen_field($fields, $form_group);
     }
 }

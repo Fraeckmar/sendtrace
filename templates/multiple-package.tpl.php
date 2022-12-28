@@ -15,7 +15,7 @@ echo "<div id='multiple-package' class='col-sm-12 mb-3'>";
                                 echo "</th>";
                             }
                             if ($allow_add_delete) {
-                                echo "<th>".__('Action', 'sendtrace')."</th>";
+                                echo "<th>".__('Action', 'sendtrace-shipments')."</th>";
                             }                            
                         echo "</tr>";
                     }
@@ -35,7 +35,7 @@ echo "<div id='multiple-package' class='col-sm-12 mb-3'>";
                                         echo "</td>";
                                     }
                                     if ($allow_add_delete) {
-                                        echo "<td><span data-repeater-delete class='btn btn-sm text-white bg-danger item-delete'>".__('Delete', 'sendtrace')."</span></td>";
+                                        echo "<td><span data-repeater-delete class='btn btn-sm text-white bg-danger item-delete'>".__('Delete', 'sendtrace-shipments')."</span></td>";
                                     }
                                 echo "</tr>";
                             }
@@ -47,7 +47,7 @@ echo "<div id='multiple-package' class='col-sm-12 mb-3'>";
                                     echo "</td>";
                                 }
                                 if ($allow_add_delete) {
-                                    echo "<td><span data-repeater-delete class='btn btn-sm text-white bg-danger item-delete'>".__('Delete', 'sendtrace')."</span></td>";
+                                    echo "<td><span data-repeater-delete class='btn btn-sm text-white bg-danger item-delete'>".__('Delete', 'sendtrace-shipments')."</span></td>";
                                 }
                             echo "</tr>";
                         }
@@ -57,7 +57,7 @@ echo "<div id='multiple-package' class='col-sm-12 mb-3'>";
                     echo "<tfoot>";
                         echo "<tr>";
                             echo "<td colspan='".esc_html(count($package_fields)+1)."' align='right'>";
-                                echo "<span type='button' data-repeater-create class='btn btn-sm text-white btn-info item-add'>".__('Add', 'sendtrace')."</span>";
+                                echo "<span type='button' data-repeater-create class='btn btn-sm text-white btn-info item-add'>".__('Add', 'sendtrace-shipments')."</span>";
                             echo "</td>";
                         echo "</tr>";
                     echo "</tfoot>";

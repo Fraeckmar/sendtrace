@@ -48,7 +48,7 @@ class SendTrace
     function is_sendtrace_post($post_id)
     {
         global $wpdb;
-        $sql = "SELECT post_title FROM `{$wpdb->prefix}posts` WHERE post_type = 'sendtrace' AND ID = %d";
+        $sql = "SELECT ID FROM `{$wpdb->prefix}posts` WHERE post_type = 'sendtrace' AND ID = %d";
         $result = $wpdb->get_var($wpdb->prepare($sql, $post_id));
         return !empty($result);
     }
@@ -91,6 +91,7 @@ class SendTrace
     {
         $field_class = array(
             'text' => 'form-control',
+            'password' => 'form-control',
             'number' => 'form-control',
             'email' => 'form-control',
             'textarea' => 'form-control',
@@ -182,12 +183,12 @@ class SendTrace
     {
         $settings_menu = array(
             'general' => array(
-                'label' => __('General Setting', 'sendtrace'),
+                'label' => __('General Setting', 'sendtrace-shipments'),
                 'file_path' => wpst_get_template('settings/general.tpl', true),
                 'in_save_setting' => true
             ),
             'email' => array(
-                'label' => __('Email Setting', 'sendtrace'),
+                'label' => __('Email Setting', 'sendtrace-shipments'),
                 'file_path' => wpst_get_template('settings/email.tpl', true),
                 'in_save_setting' => true
             )
@@ -332,16 +333,30 @@ class SendTrace
             $old_status = '';
 
             $action = isset($_POST['action']) ? wpst_sanitize_data($_POST['action']) : 'new';
-            if (empty($action) && !in_array($action, ['new', 'edit'])) {
+            if (empty($action) || !in_array($action, ['new', 'edit'])) {
                 return false;
             }
 
             if (isset($_GET['id']) && is_numeric($_GET['id']) && $this->is_sendtrace_post(wpst_sanitize_data($_GET['id']))) {
                 $shipment_id = wpst_sanitize_data($_GET['id']);
             }
-            
+
+            $post_title = isset($_POST['post_title']) ? wpst_sanitize_data($_POST['post_title']) : $this->generate_tracking_no();
+
+            if (empty($post_title)) {
+                wpst_set_notification('Invalid tracking no.', 'danger', 'info');
+                return false;
+            }
+
+            if ($this->is_tracking_no_exist($post_title)) {
+                if ($action == 'new' || ($action == 'edit' && $post_title != get_the_title($shipment_id))) {
+                    wpst_set_notification('Unable to save. Tracking no. <strong>'.$post_title.'</strong> is already exist.', 'danger', 'info');
+                    return false;
+                }                
+            }
+
             $post_args = array(
-                'post_title' => isset($_POST['post_title']) ? wpst_sanitize_data($_POST['post_title']) : $this->generate_tracking_no()
+                'post_title' => $post_title
             );
 
             if ($action == 'edit') {
@@ -358,6 +373,7 @@ class SendTrace
             }
 
             if (!$shipment_id) {
+                wpst_set_notification('Unable to save', 'danger', 'info');
                 return false;
             }
 
@@ -473,12 +489,12 @@ class SendTrace
     {
         $shortcodes_list = $this->get_shortcode_list();
         echo "<div class='row'>";
-            echo "<div id='shortcode-list' class='{$container_class}'>";
+            echo "<div id='shortcode-list' class='" .$container_class. "'>";
                 echo "<table class='table table-bordered'>";
                     echo "<thead>";
                         echo "<tr>";
-                            echo "<td class='p-2'><strong>".__('Shortcode', 'sendtrace')."</strong></td>";
-                            echo "<td class='p-2'><strong>".__('Description', 'sendtrace')."</strong></td>";
+                            echo "<td class='p-2'><strong>".__('Shortcode', 'sendtrace-shipments')."</strong></td>";
+                            echo "<td class='p-2'><strong>".__('Description', 'sendtrace-shipments')."</strong></td>";
                         echo "<tr>";
                     echo "</thead>";
                     echo "<tbody>";

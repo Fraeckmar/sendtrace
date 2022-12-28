@@ -112,8 +112,20 @@
     font-weight: 600;
     text-align: center;
 }
-.sendtrace .primary-fg {
+.sendtrace .primary-fg,
+.sendtrace .primary-fg * {
     color: var(--sendtrace-color);
+}
+.sendtrace .primary-bg {
+    background-color: var(--sendtrace-bg) !important;
+}
+
+/* From Main.min */
+.sendtrace .border-primary {
+    border-color: var(--sendtrace-bg) !important;
+}
+.sendtrace .color-primary {
+    color: var(--sendtrace-bg) !important;
 }
 .sendtrace .form-control.focus-primary:focus {
     box-shadow: inset 0 0 0 1px var(--sendtrace-bg);
@@ -169,5 +181,11 @@
     }
     #track-result .heading {
         margin-top: 2rem !important;
+    }
+    /* Datatables */
+    #shipmentsDataTable_length,
+    #shipmentsDataTable_filter {
+        text-align: left;
+        margin-bottom: 6px;
     }
 }

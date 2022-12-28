@@ -10,24 +10,24 @@ class WPSTPostType
     static function wpst_custom_post_type()
     {
         $labels_menu = array(
-			'name'					=> esc_html_x('Shipment', 'Shipment', 'sendtrace'),
-			'singular_name'			=> esc_html_x('Shipment', 'Shipment', 'sendtrace'),
-			'menu_name' 			=> esc_html__('Shipment', 'sendtrace'),
-			'all_items' 			=> esc_html__('All Shipments', 'sendtrace'),
-			'view_item' 			=> esc_html__('View Shipment', 'sendtrace'),
-			'add_new_item' 			=> esc_html__('Add New Shipment', 'sendtrace'),
-			'add_new' 				=> esc_html__('Add Shipment', 'sendtrace'),
-			'edit_item' 			=> esc_html__('Edit Shipment', 'sendtrace'),
-			'update_item' 			=> esc_html__('Update Shipment', 'sendtrace'),
-			'search_items' 			=> esc_html__('Search Shipment', 'sendtrace'),
-			'not_found' 			=> esc_html__('Shipment Not found', 'sendtrace'),
-			'not_found_in_trash' 	=> esc_html__('Shipment Not found in Trash', 'sendtrace')
+			'name'					=> esc_html_x('Shipment', 'Shipment', 'sendtrace-shipments'),
+			'singular_name'			=> esc_html_x('Shipment', 'Shipment', 'sendtrace-shipments'),
+			'menu_name' 			=> esc_html__('Shipment', 'sendtrace-shipments'),
+			'all_items' 			=> esc_html__('All Shipments', 'sendtrace-shipments'),
+			'view_item' 			=> esc_html__('View Shipment', 'sendtrace-shipments'),
+			'add_new_item' 			=> esc_html__('Add New Shipment', 'sendtrace-shipments'),
+			'add_new' 				=> esc_html__('Add Shipment', 'sendtrace-shipments'),
+			'edit_item' 			=> esc_html__('Edit Shipment', 'sendtrace-shipments'),
+			'update_item' 			=> esc_html__('Update Shipment', 'sendtrace-shipments'),
+			'search_items' 			=> esc_html__('Search Shipment', 'sendtrace-shipments'),
+			'not_found' 			=> esc_html__('Shipment Not found', 'sendtrace-shipments'),
+			'not_found_in_trash' 	=> esc_html__('Shipment Not found in Trash', 'sendtrace-shipments')
 		);
 
 		$sendtrace_supports 			= array( 'title', 'author', 'thumbnail', 'revisions' );
 		$args_tag         			= array(
-			'label' 				=> esc_html__('Shipment', 'sendtrace'),
-			'description' 			=> esc_html__('Shipment', 'sendtrace'),
+			'label' 				=> esc_html__('Shipment', 'sendtrace-shipments'),
+			'description' 			=> esc_html__('Shipment', 'sendtrace-shipments'),
 			'labels' 				=> $labels_menu,
 			'supports' 				=> $sendtrace_supports,
 			'taxonomies' 			=> array( 'sendtrace', 'post_tag' ),
