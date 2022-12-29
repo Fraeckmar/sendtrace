@@ -20,7 +20,7 @@ jQuery(document).ready(function($){
     	
         setTimeout(function(){
             $('body').find('.wpst-notif').remove();
-        }, 6000);
+        }, 7000);
 	}
     window.show_loading = function() {
         $('.sendtrace').append(LOADING_HTML);
@@ -317,5 +317,4 @@ jQuery(document).ready(function($){
         $(this).closest('.sendtrace-list').find('.sendtrace-item').removeClass(active_class);
         $(this).addClass(active_class);
     });
-    
 });

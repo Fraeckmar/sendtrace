@@ -44,6 +44,9 @@
     cursor: pointer;
     font-weight: bold;
 }
+body:not(.sendtrace-dashboard) .wpst-notif-dismiss {
+    top: 0;
+}
 .wpst-notif-dismiss:hover {
     color: #fff;
 }

@@ -58,7 +58,7 @@
             ?>
                 <td style="padding: 6px"> <?php echo esc_html($label.$unit) ?> </td>
             <?php endforeach; ?>
-        </tr>  
+        </tr>
         <?php if ($data['shipment']['packages']['data']) : ?>
             <?php foreach ($data['shipment']['packages']['data'] as $package) : ?>
                 <tr>
@@ -78,7 +78,7 @@
     <tr>
         <td align="center"> 
             <!-- image url is encrypted esc_url might not work -->
-            <img width="650px" height="120px" src="<?php echo $data['shipment']['barcode_url'] ?>"/> 
+            <img width="650px" height="120px" src="<?php echo esc_attr($data['shipment']['barcode_url']); ?>"/> 
             <p style="margin-top: 6px; font-size: 34px; letter-spacing: 3px"><strong><?php echo esc_html($data['shipment']['tracking_no']) ?></strong></p>
         </td>
     </tr>

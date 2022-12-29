@@ -67,7 +67,7 @@ function wpst_get_template($file_name, $admin_tpl=false){
         $template_path  = WPST_PLUGIN_PATH."templates/{$admin_folder}{$file_name}.php";
         $template_path  = apply_filters("wpst_locate_template_{$file_slug}", $template_path);
     }
-	return $template_path;
+	return esc_html($template_path);
 }
 
 function wpst_get_last_date_of_shipments() {
@@ -183,7 +183,7 @@ function for_wpst_assets_only() {
             $allow_bootstrap = true;
         }
     }
-    return $allow_bootstrap;
+    return apply_filters('for_wpst_assets_only', $allow_bootstrap);
 }
 
 function wpst_bg_color() {
@@ -497,7 +497,13 @@ function wpst_get_email_header_html() {
         $html .= "<tr>";
             $html .= "<td align='center' style='padding: 10px;'>";
             if (!empty($company_logo)) {
-                $html .= "<div><img src='{$company_logo}' width='auto' height='70px' style='background-color: ".wpst_fg_color()."' /></div>";
+                $html .= "<table style='width: 90px; margin-bottom: 8px; height: 90px; border-radius: 50%; background-color: #fff;'>";
+                    $html .= "<tr>";
+                        $html .= "<td align='center'>";
+                        $html .= "<img src='{$company_logo}' width='90%' height='auto' style='background-color:".wpst_fg_color()."' />";
+                        $html .= "</td>";
+                    $html .= "</tr>";
+                $html .= "</table>";
             }                
             $html .= "<div style='font-size: 28px;'><span>".get_bloginfo('name')."</span></div>";
             $html .= "</td>";
@@ -581,6 +587,14 @@ function wpst_get_packages_data($shipment_id, $data_only=false, $data_is_string=
     }
     
     return $packages;
+}
+
+function wpst_get_site_email() {
+    $site_mail = sanitize_email(get_option('new_admin_email'));
+    if (empty($site_mail)) {
+        $site_mail = sanitize_email(get_bloginfo('admin_email'));
+    }
+    return $site_mail;
 }
 
 function wpst_get_start_end_date_of_week($format='', $day_off_week=1) {

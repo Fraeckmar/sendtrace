@@ -108,7 +108,7 @@ class WPSTHook
         $mail_content = wpst_prepare_html_shortcodes($shipment_id, wpst_construct_mail_body($body, $footer, true));
 
         $headers = array('Content-Type: text/html; charset=UTF-8');
-        $headers[] = "From: " .get_bloginfo('name'). " <".$site_mail.">\r\n";
+        $headers[] = "From: " .get_bloginfo('name'). " <".sanitize_email($site_mail).">\r\n";
         $attachments = apply_filters('wpst_admin_mail_attachments', array(), $shipment_id);
 
         if(!empty($cc)){
@@ -170,7 +170,7 @@ class WPSTHook
         $mail_content = wpst_prepare_html_shortcodes($shipment_id, wpst_construct_mail_body($body, $footer));
 
         $headers = array('Content-Type: text/html; charset=UTF-8');
-        $headers[] = "From: " .get_bloginfo('name'). " <".$site_mail.">\r\n";
+        $headers[] = "From: " .get_bloginfo('name'). " <".sanitize_email($site_mail).">\r\n";
         $attachments = apply_filters('wpst_client_mail_attachments', array(), $shipment_id);
 
         if(!empty($cc)){

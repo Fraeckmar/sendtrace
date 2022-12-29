@@ -90,7 +90,7 @@ class WPSTPdf
         ?>
         <style>
             * {
-                font-size: <?php echo $font_size; ?>px;
+                font-size: <?php echo esc_attr($font_size); ?>px;
             }
             body, html { margin: 15px; }
             table { border-collapse: collapse; width: 100%; }

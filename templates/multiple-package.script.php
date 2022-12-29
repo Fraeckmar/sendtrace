@@ -1,7 +1,7 @@
 <script>
     jQuery(document).ready(function($) {
-        const CUBIC_DIVISOR = <?php echo $sendtrace->get_cubic_meter_divisor() ?>;
-        const VOLUMETRIC_DIVISOR = <?php echo $sendtrace->get_volumetric_weight_divisor() ?>;
+        const CUBIC_DIVISOR = <?php echo esc_attr($sendtrace->get_cubic_meter_divisor()) ?>;
+        const VOLUMETRIC_DIVISOR = <?php echo esc_attr($sendtrace->get_volumetric_weight_divisor()) ?>;
 
         $('#multiple-package').on('change', '.qty, .weight, .length, .width, .height', function() {
             var pkg_totals = {

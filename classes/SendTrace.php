@@ -350,7 +350,7 @@ class SendTrace
 
             if ($this->is_tracking_no_exist($post_title)) {
                 if ($action == 'new' || ($action == 'edit' && $post_title != get_the_title($shipment_id))) {
-                    wpst_set_notification('Unable to save. Tracking no. <strong>'.$post_title.'</strong> is already exist.', 'danger', 'info');
+                    wpst_set_notification('Unable to save. Tracking no. <strong>'.esc_html($post_title).'</strong> is already exist.', 'danger', 'info');
                     return false;
                 }                
             }
@@ -489,7 +489,7 @@ class SendTrace
     {
         $shortcodes_list = $this->get_shortcode_list();
         echo "<div class='row'>";
-            echo "<div id='shortcode-list' class='" .$container_class. "'>";
+            echo "<div id='shortcode-list' class='" .esc_html($container_class). "'>";
                 echo "<table class='table table-bordered'>";
                     echo "<thead>";
                         echo "<tr>";

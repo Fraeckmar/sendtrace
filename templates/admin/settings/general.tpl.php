@@ -1,7 +1,7 @@
 <?php
 WPSTForm::start();
 WPSTForm::nonce(array('field' => 'wpst_setting_nonce_field', 'action' => 'wpst_setting_nonce_action'));
-echo "<div id='{$menu_key}-container' class='shadow-lg tab-container p-3 ".(($current_tab == $menu_key) ? 'active' : '')."'>";
+echo "<div id='".esc_attr($menu_key)."-container' class='shadow-lg tab-container p-3 ".(($current_tab == $menu_key) ? 'active' : '')."'>";
     echo "<div class='row'>";
         echo "<div class='col-md-6'>";
         if (!empty($general_setting_fields)) {
