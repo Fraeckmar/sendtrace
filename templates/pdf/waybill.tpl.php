@@ -92,7 +92,7 @@
                             $unit = '('.$unit.')';
                         }
                         ?>
-                            <td style="padding: 6px"> <?php echo esc_html($label).$unit ?> </td>
+                            <td style="padding: 6px"> <?php echo esc_html($label.$unit) ?> </td>
                         <?php endforeach; ?>
                     </tr>  
                     <?php if ($data['shipment']['packages']['data']) : ?>

@@ -699,7 +699,7 @@ function wpst_pagination($args=array()) {
         'custom_query' => FALSE,
         'previous_string' => __( 'Previous', 'sendtrace-shipments' ),
         'next_string' => __( 'Next', 'sendtrace-shipments' ),
-        'before_output' => '<nav class="post-nav" aria-label="'.__('Booking Pagination', 'sendtrace-shipments').'"><ul class="pagination pg-blue justify-content-center">',
+        'before_output' => '<nav class="post-nav" aria-label="'.__('Sendtrace Pagination', 'sendtrace-shipments').'"><ul class="pagination pg-blue justify-content-center">',
         'after_output' => '</ul></nav>'
     );
     
@@ -771,6 +771,6 @@ function wpst_pagination($args=array()) {
         $echo .= '<li class="next page-item"><a class="btn btn-sm color-primary page-link waves-effect waves-effect" href="' . esc_url($lastpage) . '">' . esc_html__( 'Last', 'sendtrace-shipments' ) . '</a></li>';
     }
     if (isset($echo)) {
-        echo $args['before_output'] . $echo . $args['after_output'];
+        echo $args['before_output'] .esc_html($echo). $args['after_output'];
     }
 }

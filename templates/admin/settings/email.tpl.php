@@ -1,5 +1,5 @@
 <?php
-$sub_tab = isset($_GET['sub']) ? $_GET['sub'] : 'admin';
+$sub_tab = isset($_GET['sub']) ? wpst_sanitize_data($_GET['sub']) : 'admin';
 echo "<div class='wpst-sub-container'>";
     echo "<div id='".esc_attr($menu_key)."-container' class='shadow-lg tab-container p-2 ".(($current_tab == $menu_key) ? 'active' : '')."'>";
         echo "<div class='wpst-sub-navigation wpst-navigation mb-3 pb-2 border-bottom'>";
